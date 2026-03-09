@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<!--
+    references:
+    - images from: DLSU ISO (Facebook Page) https://www.facebook.com/infosecorg
+    - https://www.w3schools.com/html/html_images.asp
+    - https://www.freecodecamp.org/news/how-to-work-with-images-in-html/
+    - https://codingartistweb.com/2024/12/image-gallery-with-lightbox-effect-using-html-css-and-javascript/
+-->
+<html>
+    <head>
+        <title>Information Security Organization (ISO) | OrgSpace</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body data-org="iso@dlsu.edu.ph">
+        <main>
+             <nav id="menu">
+                <span class="menu-title">DLSU Organizations</span>
+                <input type="checkbox" id="responsive-menu"><label></label>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a class="dropdown-arrow active" href="#organizations">Organizations</a>
+                        <ul class="sub-menus">
+                            <li><a href="/org1">Archers for UNICEF</a></li>
+                            <li><a href="/org2">Council of Student Organizations</a></li>
+                            <li><a href="/org3">Information Security Organization</a></li>
+                            <li><a href="/org4">La Salle Computer Society</a></li>
+                            <li><a href="/org5">Management of Financial Institutions Association</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/contact">Contact Us</a></li>
+
+
+                    <li class="menu-profile" id="profileMenu">
+                        <button class="profile-btn" id="profileBtn" aria-haspopup="true" aria-expanded="false">
+                        <img src="/assets/profile-icon.png" alt="Account" class="profile-icon">
+                        </button>
+
+                        <ul class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Account menu"></ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <section class="org-header">
+                <div class="org-header-inner">
+                    <img src="/assets/ISO_Logo.jpg" alt="Archers for UNICEF Logo" class="org-logo">
+
+                    <div class="org-header-text">
+                        <h1>Information Security Organization (ISO)</h1>
+                        <p class="org-tagline">
+                            Promoting cybersecurity competence and awareness.
+                        </p>
+                        <span class="org-category">Academic Organization</span>
+
+                        <a href="/reviews3" class="reviews-btn">See Reviews</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="org-body">
+                
+                <div class="org-highlights">
+                    <img src="/assets/ISO1.jpg" alt="ISO Highlight 1" class="lightbox-trigger">
+                    <img src="/assets/ISO2.jpg" alt="ISO Highlight 2" class="lightbox-trigger">
+                    <img src="/assets/ISO3.jpg" alt="ISO Highlight 3" class="lightbox-trigger">
+                </div>
+
+                <div class="org-split">
+
+                    <div class="org-main">
+
+                        <div class="org-section">
+                            <h2>About the Organization</h2>
+                            <p>
+                            The Information Security Organization (ISO) is the sole cybersecurity-oriented student organization in De La Salle University, participating in CTF competitions and bringing awareness to network and information security-related topics and practices to the Lasallian community.
+                            <br><br>
+                            ISO aims to provide skills-building, training, and opportunities to students from across the university who are interested in information security and to guide them toward becoming competent security professionals in the future under the guidance of experts who are already in the field.
+                            </p>
+                        </div>
+
+                        <div class="org-section">
+                            <h2>Flagships and Plans</h2>
+
+                            <h4>Open Sessions</h4>
+                            <p>
+                                Led by experienced members, faculty members, and industry experts, Open Sessions are exclusive and meant to hone the skills of members on topics usually covered by CTF competitions, such as digital forensics and cryptography.
+                            </p>
+                            <ul class="indented-list">
+                                <li>Wargames are CTF or incident/attack simulations for hands-on experience.</li>
+                                <li>101s are lecture-style walkthrough sessions with discussions and Q&As.</li>
+                            </ul>
+
+                            <h4>CTF Hub</h4>
+                            <p>
+                                The DLSU CTF Hub is an information security opportunities channel hosted on Discord and managed by ISO’s Development Team.
+                            </p>
+
+                            <h4>ISO Certified</h4>
+                            <ul class="indented-list">
+                                <li>Newsletter on certifications and cybersecurity opportunities.</li>
+                                <li>Industry talks and workshops with security professionals.</li>
+                            </ul>
+
+                            <h4>Sudo Reboot Now</h4>
+                            <p>
+                                Themed bonding sessions where members connect and prepare for competitions.
+                            </p>
+
+                            <h4>Catch That Flag</h4>
+                            <p>
+                                ISO's annual capture-the-flag competition open to students of all backgrounds.
+                            </p>
+                        </div>
+                    </div>
+
+                    <aside class="org-aside">
+                        <div class="org-section">
+                            <h2>Current Board</h2>
+                            <div class="board-cards">
+
+                                <div class="board-card">
+                                    <h4>Michael Maglente</h4>
+                                    <span>President</span>
+                                </div>
+
+                                <div class="board-card">
+                                    <h4>Andre Prestoza</h4>
+                                    <span>Vice President for Administration</span>
+                                </div>
+
+                                <div class="board-card">
+                                    <h4>TJ Tanchiao</h4>
+                                    <span>Vice President for Research and Training</span>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+                
+                <button id="create-post-btn" class="create-post hidden"> Create Post </button>
+
+                <div class="org-section">
+                    <h2>Announcements & Updates</h2>
+
+                    <div class="org-posts">      
+                        <article class="org-post">
+                            <img src="/assets/ISO_CTFW.jpg"
+                            alt="ISO First Capture the flag workhop"
+                            class="post-image lightbox-trigger">
+
+                            <div class="post-header">
+                                <h3>2nd General Assembly</h3>
+                                <div class="post-actions hidden">
+                                    <button class="edit-post-btn">Edit</button>
+                                    <button class="delete-post-btn">Delete</button>
+                                </div>
+                            </div>
+                            <span class="post-date">January 8, 2026</span>
+                            
+                            <div class="post-content">
+                                🔒 New to CTFs and don't know where to start? <br>
+                                Wanting to test your skills and knowledge gained from your classes? <br>
+                                Discover something new with a gamified version of puzzle solving, but with a cybersecurity twist! <br><br>
+
+                                Join us in ISO's first CTF Workshop of 2026: Introduction to CTF <br><br>
+
+                                ✅Jan 14, 1:00–2:30 PM, held online & F2F at GK105-106 <br>
+                                ✅Register here: https://bit.ly/ISOIntroToCTFs <br><br>
+
+                                #ISOIntroToCTF2026 <br>
+                                #ISO2526 #CybersecurityCompetenceAndAwareness <br>
+                            </div>
+                            <button class="comment-toggle">View comments</button>
+                            <div class="comments hidden">
+
+                                <div class="comment" data-owner="isha_zulueta@dlsu.edu.ph">
+                                    <strong>Isha Zulueta</strong>
+                                    <p class="comment-text">Looking forward to this!</p>
+
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+
+                                <div class="comment" data-owner="nicole_shi@dlsu.edu.ph">
+                                    <strong>Nicole Shi</strong>
+                                    <p class="comment-text">Will this open to non-members as well?</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+
+                                <div class="comment" data-owner="mafia@dlsu.edu.ph">
+                                    <strong>Management of Financial Institutions Association</strong>
+                                    <p class="comment-text">See you all!</p>
+                                    
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="add-comment hidden">
+                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment">Post</button>
+                            </div>
+
+                            <p class="login-warning hidden">Log in to add a comment.</p>
+
+                        </article>
+
+                        <article class="org-post">
+                            <img src="/assets/ISO_SYF.jpg"
+                            alt="Career Talk 2025: Securing your future"
+                            class="post-image lightbox-trigger">
+
+                            <div class="post-header">
+                                <h3>Career Talk 2025: Securing your future</h3>
+                                <div class="post-actions hidden">
+                                    <button class="edit-post-btn">Edit</button>
+                                    <button class="delete-post-btn">Delete</button>
+                                </div>
+                            </div>
+                            <span class="post-date">November 21, 2025</span>
+                            <div class="post-content">
+                                ✨ Ready to launch your cyber career into a new galaxy? <br>
+                                Discover career paths, challenges, and insider tips from industry expert AJ Malicsi at our second ever ISO Career Talk 2025: Securing Your Future. <br><br>
+
+                                ⭐Nov 29, 1:00–2:20 PM, held online & open to all! <br>
+                                ⭐Register here: https://forms.gle/kGBYEQwvPGzNv69i9 <br><br>
+
+                                #ISOCareerTalk #PreparingForMyInfoSecCareer <br>
+                                #ISO2526 #CybersecruityCompetenceAndAwareness <br>
+                            </div>
+
+                            <button class="comment-toggle">View comments</button>
+                            <div class="comments hidden">
+
+                                <div class="comment" data-owner="lara_turk@dlsu.edu.ph">
+                                    <strong>Lara Turk</strong>
+                                    <p class="comment-text">🤗</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+
+                                <div class="comment" data-owner="iso@dlsu.edu.ph">
+                                    <strong>Information Security Organization</strong>
+                                    <p class="comment-text">Comment what you're most excited about!</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="add-comment hidden">
+                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment">Post</button>
+                            </div>
+
+                            <p class="login-warning hidden">Log in to add a comment.</p>
+
+                        </article>
+
+                        <article class="org-post">
+                            <img src="/assets/ISO_FGA.jpg"
+                            alt="ISO First General Assembly"
+                            class="post-image lightbox-trigger">
+
+                            <div class="post-header">
+                                <h3>ISO First General Assembly</h3>
+                                <div class="post-actions hidden">
+                                    <button class="edit-post-btn">Edit</button>
+                                    <button class="delete-post-btn">Delete</button>
+                                </div>
+                            </div>
+                            <span class="post-date">November 5, 2025</span>
+
+                            <div class="post-content">
+                                🍕 Are you ready for the Assembly of '25? <br>
+
+                                ISO Members! Come join us at our First General Assembly happening on November 12, 2025 at Room GK103 between 12 PM to 3PM! We'll discuss future projects, what it means to be a cybersecurity professional, and our plans for upcoming CTF Trainings! See you there 💚😝 <br><br>
+
+                                📝Pre-register now at this link: https://bit.ly/ISO-GA-PreRegister <br><br>
+
+                                #YesThereWillBePizza <br>
+                                #ISO2526 <br>
+                                #CybersecurityCompetenceAndAwareness <br>
+                            </div>
+
+                            <button class="comment-toggle">View comments</button>
+                            <div class="comments hidden">
+                                <div class="comment" data-owner="aaliyah_pangan@dlsu.edu.ph">
+                                    <strong>Aaliyah Pangan</strong>
+                                    <p class="comment-text">Can't wait!</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-comment hidden">
+                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment">Post</button>
+                            </div>
+
+                            <p class="login-warning hidden">Log in to add a comment.</p>
+                        </article>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="create-post-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Create New Post</h3>
+
+            <input type="text" id="new-post-title" placeholder="Post title">
+
+            <textarea id="new-post-content" placeholder="Write your announcement..."></textarea>
+
+            <input type="file" id="new-post-image" accept="image/*">
+
+            <div class="modal-actions">
+                <button id="submit-post">Post</button>
+                <button id="cancel-post">Cancel</button>
+            </div>
+            </div>
+        </div>
+
+
+        <div id="js-lightbox" class="js-lightbox hidden">
+            <span class="js-lightbox-close">&times;</span>
+            <img src="" alt="Expanded view">
+        </div>
+
+        <script src="/script.js"></script>
+        
+    </body>
+</html>
+
+
+

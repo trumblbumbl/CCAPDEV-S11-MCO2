@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<!--
+    references:
+    - images from: DLSU AU (Facebook Page) https://www.facebook.com/DLSUAU
+    - https://www.w3schools.com/html/html_images.asp
+    - https://www.freecodecamp.org/news/how-to-work-with-images-in-html/
+    - https://codingartistweb.com/2024/12/image-gallery-with-lightbox-effect-using-html-css-and-javascript/
+-->
+<html>
+    <head>
+        <title>Archers for UNICEF (AU) | OrgSpace</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body data-org="au@dlsu.edu.ph">
+        <main>
+             <nav id="menu">
+                <span class="menu-title">DLSU Organizations</span>
+                <input type="checkbox" id="responsive-menu"><label></label>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a class="dropdown-arrow active" href="#organizations">Organizations</a>
+                        <ul class="sub-menus">
+                            <li><a href="/org1">Archers for UNICEF</a></li>
+                            <li><a href="/org2">Council of Student Organizations</a></li>
+                            <li><a href="/org3">Information Security Organization</a></li>
+                            <li><a href="/org4">La Salle Computer Society</a></li>
+                            <li><a href="/org5">Management of Financial Institutions Association</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/contact">Contact Us</a></li>
+
+
+                    <li class="menu-profile" id="profileMenu">
+                        <button class="profile-btn" id="profileBtn" aria-haspopup="true" aria-expanded="false">
+                        <img src="/assets/profile-icon.png" alt="Account" class="profile-icon">
+                        </button>
+
+                        <ul class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Account menu"></ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <section class="org-header">
+                <div class="org-header-inner">
+                    <img src="/assets/AU_logo1.png" alt="Archers for UNICEF Logo" class="org-logo">
+
+                    <div class="org-header-text">
+                        <h1>Archers for UNICEF (AU)</h1>
+                        <p class="org-tagline">
+                            Always for the women and children.
+                        </p>
+                        <span class="org-category">Volunteer Organization</span>
+
+                        <a href="/reviews1" class="reviews-btn">See Reviews</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="org-body">
+                
+                <div class="org-highlights">
+                    <img src="/assets/AU1.jpg" alt="AU Highlight 1" class="lightbox-trigger">
+                    <img src="/assets/AU2.jpg" alt="AU Highlight 2" class="lightbox-trigger">
+                    <img src="/assets/AU3.jpg" alt="AU Highlight 3" class="lightbox-trigger">
+                </div>
+
+                <div class="org-split">
+                    <div class="org-main">
+
+                        <div class="org-section">
+                            <h2>About the Organization</h2>
+                            <p>
+                                Archers for UNICEF of De La Salle University-Manila is a non-profit organization that envisions a brighter 
+                                and more inclusive future for Filipino youth and women. Reflecting the mission of its partner organization, 
+                                AU continues to spearhead initiatives centered on advocating for the rights and well-being of children 
+                                while achieving a holistic society supported by equitable opportunities.
+                                <br><br>
+                                AU envisions a brighter future for the Filipino youth and women through integration of Lasallian values depicted 
+                                in various charitable endeavors. An organization dedicated to making a difference that will sustain its 
+                                objectives and goals in hopes of achieving a holistic society that will prioritize the rights of the people.
+                            </p>
+                        </div>
+
+                        <div class="org-section">
+                            <h2>Organization History</h2>
+                            <p>
+                            Archers for UNICEF (AU) was officially accredited by De La Salle University in 2017. At the time, only a few universities 
+                            in the country — such as the University of the Philippines, University of Santo Tomas, and Ateneo de Manila University — 
+                            had student organizations that worked closely with UNICEF. Seeing this gap within DLSU, then-sophomore Danielle Solancho 
+                            recognized the need for an organization that could represent both the University's values and UNICEF's mission.
+                            <br><br>
+                            Driven by her long-standing involvement in student organizations and her passion for service, Danielle actively sought 
+                            opportunities to volunteer beyond the University. She reached out to various non-profit organizations, including UNICEF, 
+                            hoping to gain experience and contribute meaningfully. However, these efforts were often met with rejection or no response 
+                            at all. Rather than discouraging her, these setbacks highlighted the lack of accessible avenues for students who genuinely 
+                            wanted to serve.
+                            <br><br>
+                            When the opportunity to establish a new organization in DLSU arose, Danielle took it as a sign to move forward. With careful 
+                            planning, extensive paperwork, and the support of her family, she began laying the foundation for Archers for UNICEF. After 
+                            a series of discussions and coordination, UNICEF eventually agreed to partner with DLSU, marking the official beginning of AU. 
+                            Since then, the organization has grown into a space where students can actively engage in advocacy, give back to marginalized 
+                            communities, and take part in initiatives that aim to create meaningful and lasting impact.
+                            </p>
+                        </div>
+                    </div>
+
+                    <aside class="org-aside">
+                        <div class="org-section">
+                            <h2>Current Board</h2>
+                            <div class="board-cards">
+
+                                <div class="board-card">
+                                    <h4>Cherubim Citco</h4>
+                                    <span>President</span>
+                                </div>
+
+                                <div class="board-card">
+                                    <h4>Aiella Evangelista</h4>
+                                    <span>EVP - Internal Affairs</span>
+                                </div>
+
+                                <div class="board-card">
+                                    <h4>Grace Gonzales</h4>
+                                    <span>EVP - External Affairs</span>
+                                </div>
+
+                                <div class="board-card">
+                                    <h4>Karll Cueto</h4>
+                                    <span>EVP - Integrated Marketing Communications</span>
+                                </div>
+
+                                <div class="board-card">
+                                    <h4>Aryanna Infante</h4>
+                                    <span>EVP - Operations</span>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                </div>
+                
+                <button id="create-post-btn" class="create-post hidden"> Create Post </button>
+
+                <div class="org-section">
+                    <h2>Announcements & Updates</h2>
+
+                    <div class="org-posts">      
+                        <article class="org-post">
+                            <img src="/assets/AU_2ndGA.jpg"
+                            alt="2nd General Assembly"
+                            class="post-image lightbox-trigger">
+
+                            <div class="post-header">
+                                <h3>2nd General Assembly</h3>
+                                <div class="post-actions hidden">
+                                    <button class="edit-post-btn">Edit</button>
+                                    <button class="delete-post-btn">Delete</button>
+                                </div>
+                            </div>
+                            <span class="post-date">January 19, 2026</span>
+                            
+                            <div class="post-content">
+                                Let us fly beyond the ordinary! 💫 <br><br>
+                                The crew is calling, and Archers for UNICEF is ready to welcome its AUdventurers! ⚓️<br> 
+                                Take flight beyond the familiar and step into a journey where every voice matters, every dreamer counts, and every adventure inspires. Fly into the unknown, and let purpose guide your way! 🌟 
+                                <br><br>
+                                Join us for the 2nd General Assembly: Finding HAUme in Neverland on January 21, 2026, from 4:00 PM to 6:00 PM at Br. Andrew Gonzales Hall 1103. Explore new lands, find your new crew, and discover how your heart and ideas can shape something magical. 🧚‍♀️ 
+                                <br><br>
+                                ✨Don't miss the adventure by pre-registering here: bit.ly/AU_2ndGA_Pre-Reg 
+                                Your wings are ready… It's time to find your way home! 🗺️ <br><br>
+                                #TimeToFly <br>
+                                #FindingHAUmeinNeverland <br>
+                                #ArchersForUNICEF<br><br> 
+                                Pub by Brent Lim <br>
+                                Caption by Giliana Intalan <br>
+                                **Walk-ins are allowed for limited slots only. <br>
+                                As per CSO-PNP Approved: OPA-03116
+                            </div>
+                            <button class="comment-toggle">View comments</button>
+                            <div class="comments hidden">
+
+                                <div class="comment" data-owner="samantha_sanchez@dlsu.edu.ph">
+                                    <strong>Samantha Sanchez</strong>
+                                    <p class="comment-text">Looking forward to this!</p>
+
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+
+                                <div class="comment" data-owner="ethan_guo@dlsu.edu.ph">
+                                    <strong>Ethan Guo</strong>
+                                    <p class="comment-text">Is this open to non-members as well?</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+
+                                <div class="comment" data-owner="au@dlsu.edu.ph">
+                                    <strong>Archers for UNICEF</strong>
+                                    <p class="comment-text">See you all!</p>
+                                    
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="add-comment hidden">
+                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment">Post</button>
+                            </div>
+
+                            <p class="login-warning hidden">Log in to add a comment.</p>
+
+                        </article>
+
+                        <article class="org-post">
+                            <img src="/assets/AU_WCD.jpg"
+                            alt="World Children's Day"
+                            class="post-image lightbox-trigger">
+
+                            <div class="post-header">
+                                <h3>World Children's Day</h3>
+                                <div class="post-actions hidden">
+                                    <button class="edit-post-btn">Edit</button>
+                                    <button class="delete-post-btn">Delete</button>
+                                </div>
+                            </div>
+                            <span class="post-date">November 20, 2025</span>
+                            <div class="post-content">
+                                "A person's a person, no matter how small" - Dr. Seuss🤗<br><br>
+                                This World Children's Day, we celebrate the wonder, curiosity, and joy that children bring to our communities. 👧 Their voices, their questions, their laughter — each reminds us of the importance of nurturing safe spaces where their dreams can grow. 🌱
+                                <br><br>
+                                Now, let us be reminded that every small voice matters, because it's their day, their rights, and their opportunity to shape the world around them. 🗣️🌎
+                                <br><br>
+                                To know more about World Children's Day, you may visit the links below:
+                                🔗https://www.unicef.org/parenting/world-childrens-day-toolkit
+                                🔗https://www.un.org/en/observances/world-childrens-day
+                                🔗https://www.who.int/.../20-11-2019-world-children-s-day...
+                                🔗https://www.unicef.org/.../focus-children-climate-change...
+                                <br><br>
+                                #MyDayMyRights #WorldChildrensDay #MonthlyMAUtters <br>
+                                #ArchersForUNICEF<br>
+                                Pub by Clara Nicdao<br>
+                                Caption by Wyonna Quiambao<br>
+                                As per CSO-PNP Approved: OPA-02738
+                            </div>
+
+                            <button class="comment-toggle">View comments</button>
+                            <div class="comments hidden">
+
+                                <div class="comment" data-owner="lara_turk@dlsu.edu.ph">
+                                    <strong>Lara Turk</strong>
+                                    <p class="comment-text">🤗</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+
+                                <div class="comment" data-owner="mafia@dlsu.edu.ph">
+                                    <strong>DLSU MaFIA</strong>
+                                    <p class="comment-text">Yay!</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="add-comment hidden">
+                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment">Post</button>
+                            </div>
+
+                            <p class="login-warning hidden">Log in to add a comment.</p>
+
+                        </article>
+
+                        <article class="org-post">
+                            <img src="/assets/AU_MAUgic.jpg"
+                            alt="MAUgic in Motion"
+                            class="post-image lightbox-trigger">
+
+                            <div class="post-header">
+                                <h3>MAUgic in Motion: Unleashing the Powers Within</h3>
+                                <div class="post-actions hidden">
+                                    <button class="edit-post-btn">Edit</button>
+                                    <button class="delete-post-btn">Delete</button>
+                                </div>
+                            </div>
+                            <span class="post-date">November 13, 2025</span>
+
+                            <div class="post-content">
+                                Good news, guiding spirits! 🧙🏻‍♀️ <br><br>
+                                🌲 In the forest, an unknown power calls and reaches out to you. It's your time to guide the hands of adventurers destined to awaken their inner magic and set it in motion. 
+                                <br><br>
+                                Take part in MAUgic in Motion: Unleashing the Powers Within, where you'll lead our young adventurers through a world of imagination, teamwork, and wonder. 💜 Help others discover the power they never knew they had. 🧚🏻‍♀️
+                                <br><br>
+                                🕯 Be the guiding light for our young dreamers on November 22, 2025, from 10:00 AM  to 12:00 PM at John Gokongwei Building, G104-105, as they journey through tales that sparkle and adventures that awaken the mAUgic within.  💫
+                                <br><br>
+                                🪄Step forward and claim your role as a facilitator by following these steps: <br>
+                                1️⃣ Prove your magical potential by filling out the Eligibility Form: bit.ly/MaMoEligibilityForms<br>
+                                2️⃣ Once your eligibility is confirmed, sign up here: bit.ly/MaMo-PreRegForm<br>
+                                The forest has chosen you, it's time to let your light lead the way! 🌙
+                                <br><br>
+                                #TheMAUgicBegins #MAUgicinMotion <br>
+                                #ArchersForUnicef<br>
+                                Pub by Khyra Villorente<br>
+                                Caption by Giliana Intalan<br>
+                                As per CSO-PNP Approved: OPA-02320
+                            </div>
+
+                            <button class="comment-toggle">View comments</button>
+                            <div class="comments hidden">
+                                <div class="comment" data-owner="aaliyah_pangan@dlsu.edu.ph">
+                                    <strong>Aaliyah Pangan</strong>
+                                    <p class="comment-text">Can't wait!</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-comment hidden">
+                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment">Post</button>
+                            </div>
+
+                            <p class="login-warning hidden">Log in to add a comment.</p>
+                        </article>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="create-post-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Create New Post</h3>
+
+            <input type="text" id="new-post-title" placeholder="Post title">
+
+            <textarea id="new-post-content" placeholder="Write your announcement..."></textarea>
+
+            <input type="file" id="new-post-image" accept="image/*">
+
+            <div class="modal-actions">
+                <button id="submit-post">Post</button>
+                <button id="cancel-post">Cancel</button>
+            </div>
+            </div>
+        </div>
+
+
+        <div id="js-lightbox" class="js-lightbox hidden">
+            <span class="js-lightbox-close">&times;</span>
+            <img src="" alt="Expanded view">
+        </div>
+
+        <script src="/script.js"></script>
+        
+    </body>
+</html>
+
+
+

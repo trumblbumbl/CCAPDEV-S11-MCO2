@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Register - OrgSpace</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body>
+        <main>
+            <nav id="menu">
+                <span class="menu-title">DLSU Organizations</span>
+                <input type="checkbox" id="responsive-menu"><label></label>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a class="dropdown-arrow" href="#organizations">Organizations</a>
+                        <ul class="sub-menus">
+                            <li><a href="/org1">Archers for UNICEF</a></li>
+                            <li><a href="/org2">Council of Student Organizations</a></li>
+                            <li><a href="/org3">Information Security Organization</a></li>
+                            <li><a href="/org4">La Salle Computer Society</a></li>
+                            <li><a href="/org5">Management of Financial Institutions Association</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/contact">Contact Us</a></li>
+                    <li class="menu-profile" id="profileMenu">
+                        <button class="profile-btn" id="profileBtn" aria-haspopup="true" aria-expanded="false">
+                            <img src="/assets/profile-icon.png" alt="Account" class="profile-icon">
+                        </button>
+                        <ul class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Account menu"></ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <section class="auth-section">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <div class="auth-header">
+                            <h1>Create Account</h1>
+                            <p>Join the DLSU community on OrgSpace</p>
+                        </div>
+
+                        <div class="user-type-selector">
+                            <button type="button" onclick="showForm('student')" id="studentBtn" class="user-type-btn active">
+                                Student
+                            </button>
+                            <button type="button" onclick="showForm('organization')" id="orgBtn" class="user-type-btn">
+                                Organization
+                            </button>
+                        </div>
+
+                        <!-- Student Registration Form -->
+                        <form id="studentForm" class="auth-form active-form" action="/register" method="POST">
+                            <h3>Student Registration</h3>
+
+                            <input type="hidden" name="userType" value="student">
+
+                            <div class="form-group">
+                                <label>DLSU Email</label>
+                                <input type="email" id="stuEmail" name="email" placeholder="firstname.lastname@dlsu.edu.ph" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" id="stuFirstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" id="stuLastName" name="lastName" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Student ID Number</label>
+                                <input type="text" id="stuId" name="studentId" minlength="8" maxlength="8" pattern="\d{8}" inputmode="numeric" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>College</label>
+                                <select id="stuCollege" name="college" required>
+                                    <option value="">Select College</option>
+                                    <option value="BAGCED">Br. Andrew Gonzalez FSC College of Education</option>
+                                    <option value="SOE">Carlos L. Tiu School of Economics</option>
+                                    <option value="CCS">College of Computer Studies</option>
+                                    <option value="CLA">College of Liberal Arts</option>
+                                    <option value="COS">College of Science</option>
+                                    <option value="GCOE">Gokongwei College of Engineering</option>
+                                    <option value="RVRCOB">Ramon V. del Rosario College of Business</option>
+                                </select>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" id="stuPassword" name="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input type="password" id="stuConfirmPassword" name="confirmPassword" required>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="auth-submit-btn">
+                                Create Student Account
+                            </button>
+                        </form>
+
+                        <!-- Organization Registration Form -->
+                        <form id="organizationForm" class="auth-form" action="/register" method="POST">
+                            <h3>Organization Registration</h3>
+
+                            <input type="hidden" name="userType" value="organization">
+
+                            <div class="form-group">
+                                <label>Organization Name</label>
+                                <input type="text" id="orgName" name="orgName" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>DLSU Email</label>
+                                <input type="email" id="orgEmail" name="email" placeholder="orgname@dlsu.edu.ph" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea id="orgDescription" name="description" rows="3" required></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" id="orgPassword" name="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input type="password" id="orgConfirmPassword" name="confirmPassword" required>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="auth-submit-btn">
+                                Register Organization
+                            </button>
+                        </form>
+
+                        <div class="auth-footer">
+                            <p>Already have an account? <a href="/login">Sign in here</a></p>
+                            <p><a href="/">← Back to Home</a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <script src="/script.js"></script>
+            <script>
+                function showForm(userType) {
+                    document.querySelectorAll('.user-type-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+
+                    document.querySelectorAll('.auth-form').forEach(form => {
+                        form.classList.remove('active-form');
+                    });
+
+                    if (userType === 'student') {
+                        document.getElementById('studentBtn').classList.add('active');
+                        document.getElementById('studentForm').classList.add('active-form');
+                    } else {
+                        document.getElementById('orgBtn').classList.add('active');
+                        document.getElementById('organizationForm').classList.add('active-form');
+                    }
+                }
+
+                document.getElementById("studentForm").addEventListener("submit", function (e) {
+                    const email = document.getElementById("stuEmail").value.trim();
+                    const password = document.getElementById("stuPassword").value;
+                    const confirmPassword = document.getElementById("stuConfirmPassword").value;
+
+                    if (!email.endsWith("@dlsu.edu.ph")) {
+                        e.preventDefault();
+                        alert("Please use a valid DLSU email address.");
+                        return;
+                    }
+
+                    if (password !== confirmPassword) {
+                        e.preventDefault();
+                        alert("Passwords do not match.");
+                    }
+                });
+
+                document.getElementById("organizationForm").addEventListener("submit", function (e) {
+                    const email = document.getElementById("orgEmail").value.trim();
+                    const password = document.getElementById("orgPassword").value;
+                    const confirmPassword = document.getElementById("orgConfirmPassword").value;
+
+                    if (!email.endsWith("@dlsu.edu.ph")) {
+                        e.preventDefault();
+                        alert("Please use a valid DLSU email address.");
+                        return;
+                    }
+
+                    if (password !== confirmPassword) {
+                        e.preventDefault();
+                        alert("Passwords do not match.");
+                    }
+                });
+
+                const currentUser = auth.getCurrentUser();
+                if (currentUser.isLoggedIn) {
+                    alert("You are already logged in!");
+                    window.location.href = "/";
+                }
+            </script>
+        </main>
+    </body>
+</html>

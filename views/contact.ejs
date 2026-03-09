@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OrgSpace</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body>
+        <main>
+            <nav id="menu">
+                <span class="menu-title">DLSU Organizations</span>
+                <input type="checkbox" id="responsive-menu"><label></label>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a class="dropdown-arrow" href="#organizations">Organizations</a>
+                        <ul class="sub-menus">
+                            <li><a href="/org1">Archers for UNICEF</a></li>
+                            <li><a href="/org2">Council of Student Organizations</a></li>
+                            <li><a href="/org3">Information Security Organization</a></li>
+                            <li><a href="/org4">La Salle Computer Society</a></li>
+                            <li><a href="/org5">Management of Financial Institutions Association</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/contact" class="active">Contact Us</a></li>
+
+
+                    <li class="menu-profile" id="profileMenu">
+                        <button class="profile-btn" id="profileBtn" aria-haspopup="true" aria-expanded="false">
+                        <img src="/assets/profile-icon.png" alt="Account" class="profile-icon">
+                        </button>
+
+                        <ul class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Account menu"></ul>
+                    </li>
+                </ul>
+            </nav>
+            <section class="contact-form-section">
+                <h1 class="contact-title">CONTACT US</h1>
+                <div class="contact-form-wrap">
+                    <div class="contact-form-card">
+                        <form class="contact-form" action="#" method="post">
+                            <div class="form-grid">
+                                <div class="field">
+                                    <label for="firstName">First Name</label>
+                                    <input id="firstName" name="firstName" type="text" placeholder="First Name" required>
+                                </div>
+                                <div class="field">
+                                    <label for="lastName">Last Name</label>
+                                    <input id="lastName" name="lastName" type="text" placeholder="Last Name" required>
+                                </div>
+                                <div class="field">
+                                    <label for="email">Email</label>
+                                    <input id="email" name="email" type="email" placeholder="Email Address" required>
+                                </div>
+                                <div class="field">
+                                    <label for="phone">Mobile Number</label>
+                                    <input id="phone" name="phone" type="tel" placeholder="Mobile Number">
+                                </div>
+                                <div class="field field-full">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" name="message" rows="7" placeholder="Write your message" required></textarea>
+                                </div>
+                            </div>
+                            <button class="submit-btn" type="submit">
+                                Submit <span class="arrow">→</span>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="contact-image">
+                        <img src="/assets/bg.jpg" alt="bg">
+                    </div>
+                </div>
+            <section class="contact-info-section">
+                <div class="contact-info-grid">
+                    <div class="contact-info-card">
+                        <img src="/assets/email.png" alt="Email" class="contact-info-icon">
+                        <h3>Email Address</h3>
+                        <p>orgspace@orgspace.com</p>
+                    </div>
+                    <div class="contact-info-card">
+                        <img src="/assets/telephone.png" alt="Phone" class="contact-info-icon">
+                        <h3>Phone Number</h3>
+                        <p>(+63) 905 123 4567</p>
+                    </div>
+                    <div class="contact-info-card">
+                        <img src="/assets/location.png" alt="Location" class="contact-info-icon">
+                        <h3>Location</h3>
+                        <p>De La Salle University</p>
+                        <p>2401 Taft Avenue, Malate, Manila</p>
+                    </div>
+                </div>
+            </section>
+            </section>
+        </main>
+        <script src="/script.js"></script>
+    </body>
+</html>

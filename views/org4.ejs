@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<!--
+    references:
+    - https://www.w3schools.com/html/html_images.asp
+    - https://www.freecodecamp.org/news/how-to-work-with-images-in-html/
+    - https://codingartistweb.com/2024/12/image-gallery-with-lightbox-effect-using-html-css-and-javascript/
+-->
+<html>
+    <head>
+        <title>La Salle Computer Society (LSCS) | OrgSpace</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body data-org="lscs@dlsu.edu.ph">
+        <main>
+             <nav id="menu">
+                <span class="menu-title">DLSU Organizations</span>
+                <input type="checkbox" id="responsive-menu"><label></label>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a class="dropdown-arrow active" href="#organizations">Organizations</a>
+                        <ul class="sub-menus">
+                            <li><a href="/org1">Archers for UNICEF</a></li>
+                            <li><a href="/org2">Council of Student Organizations</a></li>
+                            <li><a href="/org3">Information Security Organization</a></li>
+                            <li><a href="/org4">La Salle Computer Society</a></li>
+                            <li><a href="/org5">Management of Financial Institutions Association</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/contact">Contact Us</a></li>
+
+
+                    <li class="menu-profile" id="profileMenu">
+                        <button class="profile-btn" id="profileBtn" aria-haspopup="true" aria-expanded="false">
+                        <img src="/assets/profile-icon.png" alt="Account" class="profile-icon">
+                        </button>
+
+                        <ul class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Account menu"></ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <section class="org-header">
+                <div class="org-header-inner">
+                    <img src="/assets/40TH logo.png" alt="LSCS Logo" class="org-logo">
+
+                    <div class="org-header-text">
+                        <h1>La Salle Computer Society (LSCS)</h1>
+                        <p class="org-tagline">
+                            Living Yesterday’s Vision. Setting Today’s Trends. Inspiring Tomorrow’s Leaders.
+                        </p>
+                        <span class="org-category">Academic Organization</span>
+
+                        <a href="/reviews4" class="reviews-btn">See Reviews</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="org-body">
+                
+                <div class="org-highlights">
+                    <img src="/assets/LSCS1.jpg" alt="LSCS Highlight 1" class="lightbox-trigger">
+                    <img src="/assets/LSCS2.jpg" alt="LSCS Highlight 2" class="lightbox-trigger">
+                    <img src="/assets/LSCS3.jpg" alt="LSCS Highlight 3" class="lightbox-trigger">
+                </div>
+                <div class="org-split">
+                    <div class="org-main">
+                        <div class="org-section">
+                        <h2>About the Organization</h2>
+                        <p>
+                            La Salle Computer Society (LSCS) is DLSU's largest and pioneering technological organization and the home organization of the College of Computer Studies. 
+                            LSCS is committed to help students learn more about tech through interactive workshops, make new friends with recreational events, develop their leadership 
+                            skills through the esteemed Junior Officer Training Program, secure a job through various career events, and more. 
+                            Now in its 40th year of service, LSCS continues to ignite, innovate, and inspire.
+                        </p>
+                    </div>
+
+                    <div class="org-section">
+                        <h2>Vision</h2>
+                        <p>
+                            We envision the La Salle Computer Society to be an organization that, through quality assistance and activities, will mold its members academically, 
+                            socially and spiritually in order for them to become competent Lasallian students and well-rounded individuals. 
+                            We also strive to continuously serve as the pioneering student organization of the De La Salle University Manila 
+                            that strongly symbolizes the expertise of the College of Computer Studies (CCS). 
+                        </p>
+                    </div>
+
+                    <div class="org-section">
+                        <h2>Mission</h2>
+                            <p>The La Salle Computer Society shall serve as a venue for growth and development of its members through a three-step course of:<br><br></p>
+                            <h4>Purpose</h4>
+                            <ul class="indented-list"><li>To know and understand the reason behind every act, decision, and endeavor pursued.</li></ul>
+                            <h4>Process</h4> 
+                            <ul class="indented-list"><li>To organize and oversee the entire procedure of every project and make sure that each goes through every necessary step towards the purpose.</li></ul>
+                            <h4>Excellence</h4>
+                            <ul class="indented-list"><li>To accomplish our goals in the best way possible and in accordance with the ideals of the organization and of De La Salle University Manila.</li></ul>
+                        
+                    </div>
+                    </div>
+
+                    <aside class="org-aside">
+                        <div class="org-section">
+                            <h2>Current Board</h2>
+                            <div class="board-cards">
+                                <div class="board-card">
+                                    <h4>Fiona Amaia Tano</h4>
+                                    <span>President</span>
+                                </div>
+                            <div class="board-card">
+                                <h4>Ana Gabrielle Luis Casas</h4>
+                                <span>Executive Vice President for Internals</span>
+                            </div>
+                            <div class="board-card">
+                                <h4>Donita Jane Taguibao</h4>
+                                <span>Executive Vice President for Externals</span>
+                            </div>
+                            <div class="board-card">
+                                <h4>Samantha Breanne Sanchez</h4>
+                                <span>Executive Vice President for Operations</span>
+                            </div>
+                            </div>
+                        </div>
+                    </aside>
+                    </div>
+                </div>
+                
+                <button id="create-post-btn" class="create-post hidden"> Create Post </button>
+
+                <div class="org-section">
+                    <h2>Announcements & Updates</h2>
+
+                    <div class="org-posts">      
+                        <article class="org-post">
+                            <img src="/assets/LSCS_Heartstrings.jpg"
+                            alt="Mackys Heartstrings"
+                            class="post-image lightbox-trigger">
+
+                            <div class="post-header">
+                                <h3>Macky's Heartstrings</h3>
+                                <div class="post-actions hidden">
+                                    <button class="edit-post-btn">Edit</button>
+                                    <button class="delete-post-btn">Delete</button>
+                                </div>
+                            </div>
+                            <span class="post-date">February 4, 2026</span>
+                            
+                            <div class="post-content">
+                                Macky’s Heartstrings is back! 🌸 Join us this February as we celebrate friendship and community within LSCS. Whether you want to send a thank-you note to a friend or just enjoy some treats, we’ve got something for everyone. ✨<br><br>
+                                💌 Send Anonymous Letters<br>
+                                Want to send a message to a friend, fellow members, or an officer? We’re accepting anonymous letters! ✍️<br> 
+                                👉 Submit your messages here:  https://lscs.info/MackysHS26_Letters<br><br>
+                                📅 Deadline: February 12, 2026<br>
+                                Drop by our booth at the Gokongwei Lobby for a fun afternoon filled with activities! 🎡 You can enjoy free treats like ice scramble 🍧, chocolates 🍫, and exclusive stickers, claim your printed letters ✉️, and join in on our mini-games, and photos with friends 📸.<br><br>
+                                📅 Booth Day: February 13, 2026<br> 
+                                🕑 Time: 1:15 PM - 5:00 PM<br>
+                                📍Location: Gokongwei Lobby<br><br>
+                                Pub by Angelo Almeda<br>
+                                Caption by Dencel Pineda<br><br>
+                                #40thLSCS<br>
+                                #RubyYear<br>
+                                #IgniteInnovateInspire<br>
+                                #LSCS_SocioCivic<br>
+                                #MackysHeartstrings<br><br>
+                                Disclaimer: This event is subject to approval by CSO APS or SLIFE<br>
+                                As per CSO-PNP Approved: OPA-03606<br>
+                            </div>
+                            <button class="comment-toggle">View comments</button>
+                            <div class="comments hidden">
+
+                                <div class="comment" data-owner="samantha_sanchez@dlsu.edu.ph">
+                                    <strong>Samantha Sanchez</strong>
+                                    <p class="comment-text">Looking forward to this!</p>
+
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+
+                                <div class="comment" data-owner="lscs@dlsu.edu.ph">
+                                    <strong>La Salle Computer Society</strong>
+                                    <p class="comment-text">Send your letters!</p>
+                                    
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="add-comment hidden">
+                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment">Post</button>
+                            </div>
+
+                            <p class="login-warning hidden">Log in to add a comment.</p>
+
+                        </article>
+
+                        <article class="org-post">
+                            <img src="/assets/LSCS_JOGACF.jpg"
+                            alt="JOGA_CF"
+                            class="post-image lightbox-trigger">
+
+                            <div class="post-header">
+                                <h3>Junior Officer General Assembly: Committee Fair</h3>
+                                <div class="post-actions hidden">
+                                    <button class="edit-post-btn">Edit</button>
+                                    <button class="delete-post-btn">Delete</button>
+                                </div>
+                            </div>
+                            <span class="post-date">January 19, 2026</span>
+                            <div class="post-content">
+                                Step on up, Junior Officers! 👋<br><br>
+
+                                It's the most jaw-dropping, 😱 heart-stopping, 💘 mind-bending, 🤯 and greatest event of the term! 👏<br><br>
+
+                                You, our fellow JO, stumbled into a world of wonders where anything can happen! 🪄Let yourself be caught up in the endless possibilities, or COMMITTEES 🧐, that this Amazing Committee Fair has in store for you !🎪<br><br>
+
+                                Well, let's not waste any time! Let's get right into the show!🍿<br>
+                                🎪 Br. Andrew Gonzales 20th Floor MPH<br>
+                                🗓️ January 24, 2026 (Saturday)<br>
+                                🕰️ 1:30 PM - 5:30 PM<br><br>
+
+                                Pub by Chastine Cabatay<br>
+                                Caption by Emman Punsalan and Faith Francisco<br><br>
+
+                                #40thLSCS<br>
+                                #RubyYear<br>
+                                #IgniteInnovateInspire<br>
+                                #LSCS_TND<br>
+                                #JOGACommFair<br><br>
+
+                                As per CSO-PNP Approved: OPA-03102
+                            </div>
+
+                            <button class="comment-toggle">View comments</button>
+                            <div class="comments hidden">
+
+                                <div class="comment" data-owner="au@dlsu.edu.ph">
+                                    <strong>Archers for UNICEF</strong>
+                                    <p class="comment-text">Cool event!</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+
+                                <div class="comment" data-owner="cso@dlsu.edu.ph">
+                                    <strong>Council of Student Organizations</strong>
+                                    <p class="comment-text">Good luck on your event!</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="add-comment hidden">
+                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment">Post</button>
+                            </div>
+
+                            <p class="login-warning hidden">Log in to add a comment.</p>
+
+                        </article>
+
+                        <article class="org-post">
+                            <img src="/assets/LSCS_2NDGA.jpg"
+                            alt="2nd General Assembly"
+                            class="post-image lightbox-trigger">
+
+                            <div class="post-header">
+                                <h3>2nd General Assembly</h3>
+                                <div class="post-actions hidden">
+                                    <button class="edit-post-btn">Edit</button>
+                                    <button class="delete-post-btn">Delete</button>
+                                </div>
+                            </div>
+                            <span class="post-date">January 14, 2026</span>
+
+                            <div class="post-content">
+                                Some people say that there is eternal joy, laughter, fun, and music in the Land of the Remembered, lying beyond the realm of the living and in the underworld—but what's stopping you from enjoying festivities here? 🎊💃<br><br>
+
+                                It may be in your destiny to stumble upon our invitation to the 2nd General Assembly on January 21, from 2:30PM to 4:45PM. 🌟 Join us at Yuchengco Hall Y507-Y509, where stories come alive and every choice shapes how tales are told. ❤️‍🔥<br><br>
+
+                                If you'd like to open the Book of Life with us, pre-register here: https://forms.gle/XZkzUfQG5RYpGedm8 📖✨<br><br>
+
+                                As the new year begins to unfold, a fresh new chapter is waiting to be written. ✍️<br><br>
+
+                                Pub by Chastine Cabatay<br>
+                                Caption by Sarah Nicole Jallorina<br><br>
+
+                                #40thLSCS<br>
+                                #RubyYear<br>
+                                #IgniteInnovateInspire<br>
+                                #LSCS_HRD<br>
+                                #2ndGeneralAssembly<br><br>
+
+                                As per CSO-PNP Approved: OPA-03069
+                            </div>
+
+                            <button class="comment-toggle">View comments</button>
+                            <div class="comments hidden">
+                                <div class="comment" data-owner="ethan_guo@dlsu.edu.ph">
+                                    <strong>Ethan Guo</strong>
+                                    <p class="comment-text">Pre-registration done!</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-comment hidden">
+                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment">Post</button>
+                            </div>
+
+                            <p class="login-warning hidden">Log in to add a comment.</p>
+                        </article>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="create-post-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Create New Post</h3>
+
+            <input type="text" id="new-post-title" placeholder="Post title">
+
+            <textarea id="new-post-content" placeholder="Write your announcement..."></textarea>
+
+            <input type="file" id="new-post-image" accept="image/*">
+
+            <div class="modal-actions">
+                <button id="submit-post">Post</button>
+                <button id="cancel-post">Cancel</button>
+            </div>
+            </div>
+        </div>
+
+
+        <div id="js-lightbox" class="js-lightbox hidden">
+            <span class="js-lightbox-close">&times;</span>
+            <img src="" alt="Expanded view">
+        </div>
+
+        <script src="/script.js"></script>
+        
+    </body>
+</html>

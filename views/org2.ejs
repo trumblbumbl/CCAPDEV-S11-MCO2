@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<!--
+    references:
+    - images from: DLSU CSO (Facebook Page) https://www.facebook.com/CSO.DLSU/
+    - https://www.dlsu.edu.ph/students/cso/
+    - https://www.w3schools.com/html/html_images.asp
+    - https://www.freecodecamp.org/news/how-to-work-with-images-in-html/
+    - https://codingartistweb.com/2024/12/image-gallery-with-lightbox-effect-using-html-css-and-javascript/
+-->
+<html>
+    <head>
+        <title>Council of Student Organizations (CSO) | OrgSpace</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body data-org="cso@dlsu.edu.ph">
+        <main>
+             <nav id="menu">
+                <span class="menu-title">DLSU Organizations</span>
+                <input type="checkbox" id="responsive-menu"><label></label>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a class="dropdown-arrow active" href="#organizations">Organizations</a>
+                        <ul class="sub-menus">
+                            <li><a href="/org1">Archers for UNICEF</a></li>
+                            <li><a href="/org2">Council of Student Organizations</a></li>
+                            <li><a href="/org3">Information Security Organization</a></li>
+                            <li><a href="/org4">La Salle Computer Society</a></li>
+                            <li><a href="/org5">Management of Financial Institutions Association</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/contact">Contact Us</a></li>
+
+
+                    <li class="menu-profile" id="profileMenu">
+                        <button class="profile-btn" id="profileBtn" aria-haspopup="true" aria-expanded="false">
+                        <img src="/assets/profile-icon.png" alt="Account" class="profile-icon">
+                        </button>
+
+                        <ul class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Account menu"></ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <section class="org-header">
+                <div class="org-header-inner">
+                    <img src="/assets/cso.png" alt="Archers for UNICEF Logo" class="org-logo">
+
+                    <div class="org-header-text">
+                        <h1>Council of Student Organizations (CSO)</h1>
+                        <p class="org-tagline">
+                             Always for Service.
+                        </p>
+                        <span class="org-category">Student Groups</span>
+
+                        <a href="/reviews2" class="reviews-btn">See Reviews</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="org-body">
+                
+                <div class="org-highlights">
+                    <img src="/assets/CSO1.jpg" alt="CSO Highlight 1" class="lightbox-trigger">
+                    <img src="/assets/CSO2.jpg" alt="CSO Highlight 2" class="lightbox-trigger">
+                    <img src="/assets/CSO3.jpg" alt="CSO Highlight 3" class="lightbox-trigger">
+                </div>
+
+                <div class="org-split">
+
+                    <div class="org-main">
+
+                        <div class="org-section">
+                            <h2>About the Organization</h2>
+                            <p>
+                            The Council of Student Organizations (CSO) is the union of accredited professional (PROF), special interest (SPIN) and socio-civic organizations of De La Salle University. Since its founding in 1974, the Council has continuously delivered quality student services and has produced outstanding student leaders dedicated to serving and contributing to the Lasallian Community.
+                            <br><br>
+                            To support the preparation, execution, and documentation of the activities/projects/initiatives of the accredited organizations, nine Executive Teams work under the supervision of the CSO Executive Board. The CSO Executive Board also serves as the coordinating entity of the Council Body composed of the Presidents of the CSO member organizations.
+                            <br><br>
+                            Further CSO implements university-wide activities participated in by the different organizations. These activities include the Frosh Welcoming (FW), Annual Recruitment Week (ARW), Green Card Alliance (GCA), Award-Giving Bodies (AGB), Lasallian Excellence Awards (LEA) and the Lasallian Enrichment Alternative Program (LEAP).
+                            </p>
+                        </div>
+
+                        <div class="org-section">
+                            <h2>Core Values</h2>
+
+                            <h4>Competence</h4>
+                            <ul class="indented-list">
+                                <li>Upholding the Lasallian brand of leadership, the Council serves as an example in innovating standards.
+
+                                </li>
+                            </ul>
+
+                            <h4>Service</h4>
+                            <ul class="indented-list">
+                                <li>Driven by the passion to serve, the Council abides by the Lasallian Core Values for the benefit of its member organizations.
+
+                                </li>
+                            </ul>
+
+                            <h4>Order</h4>
+                            <ul class="indented-list">
+                                <li>Pioneering integrity and ethics, the Council integrates these in its service and constitute discipline among its officers.
+
+                                </li>
+                            </ul>
+                            <br><br>
+
+                            <h2>Vision-Mission</h2>
+                            <p>
+                                The Council of Student Organizations is committed to delivering quality services and activities as well as developing proactive and dynamic student leaders befitting the standards of a world-class research University. We create and maintain conditions where our member organizations can achieve optimum performance and realize their goals. We are driven by the ideals of the Lasallian mission, thus, we work actively to feed the needs of the students and ultimately promote the growth of their potentials.
+                                <br><br>
+                                The Council of Student Organizations provides relevant and quality services that support heightened student involvement and development. We continually set standards that contribute to the flourishing of our member organizations as we work together to inspire growth and create a platform for communication. We are pioneers of nation-­building and Lasallian-formation by maintaining a sense of social awareness and spiritual growth in our activities.
+                            </p>
+
+
+                        </div>
+                    </div>
+
+                    <aside class="org-aside">
+                        <div class="org-section">
+                            <h2>Current Board</h2>
+                            <div class="board-cards">
+
+                                <div class="board-card">
+                                    <h4>Andreia Valderrama</h4>
+                                    <span>Chairperson</span>
+                                </div>
+
+                                <div class="board-card">
+                                    <h4>Denise Cudal</h4>
+                                    <span>Executive Vice Chairperson for Internals</span>
+                                </div>
+
+                                <div class="board-card">
+                                    <h4>Johanne Failana</h4>
+                                    <span>Executive Vice Chairperson for Externals</span>
+                                </div>
+
+                                <div class="board-card">
+                                    <h4>Patricia Solis</h4>
+                                    <span>Executive Vice Chairperson for Documentations</span>
+                                </div>
+
+                                <div class="board-card">
+                                    <h4>Joshua Ruiz</h4>
+                                    <span>Executive Vice Chairperson for Finance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+                
+                <button id="create-post-btn" class="create-post hidden"> Create Post </button>
+
+                <div class="org-section">
+                    <h2>Announcements & Updates</h2>
+
+                    <div class="org-posts">      
+                        <article class="org-post">
+                            <img src="/assets/CSO_VAL.jpg"
+                            alt="CSO Valentines Greeting"
+                            class="post-image lightbox-trigger">
+
+                            <div class="post-header">
+                                <h3>Happy Valentine's Day!</h3>
+                                <div class="post-actions hidden">
+                                    <button class="edit-post-btn">Edit</button>
+                                    <button class="delete-post-btn">Delete</button>
+                                </div>
+                            </div>
+                            <span class="post-date">February 14, 2026</span>
+                            
+                            <div class="post-content">
+                                "𝑇𝑒𝑙𝑙 𝑚𝑒, 𝑑𝑜 𝑦𝑜𝑢 𝑓𝑒𝑒𝑙 𝑡ℎ𝑒 𝑙𝑜𝑣𝑒?" <br> <br>
+
+                                Is it the fuzzy feeling in your chest? Maybe the butterflies in your stomach? 🦋 Or is it just the caffeine helping you survive the deadlines? ☕  <br> <br>
+
+                                This month is for all the moments, big and small, and everything in between! Watch out for the strike of Cupid’s arrows as we celebrate love in all its forms: from friends and family to partners and even you! In the middle of academics and deadlines, don't forget to pause for today and show a little extra care and love.  <br> <br>
+
+                                XO, your CSO family ❤  <br> <br>
+
+                                Publicity by: Ella Torente  <br>
+                                Caption by: Dean Laborte  <br> <br>
+                            </div>
+                            <button class="comment-toggle">View comments</button>
+                            <div class="comments hidden">
+
+                                <div class="comment" data-owner="isha_zulueta@dlsu.edu.ph">
+                                    <strong>Isha Zulueta</strong>
+                                    <p class="comment-text">So nice!!</p>
+
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+
+                                <div class="comment" data-owner="nicole_shi@dlsu.edu.ph">
+                                    <strong>Nicole Shi</strong>
+                                    <p class="comment-text">Happy Valentines!!</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+
+                                <div class="comment" data-owner="mafia@dlsu.edu.ph">
+                                    <strong>Management of Financial Institutions Association</strong>
+                                    <p class="comment-text">♡♡♡♡♡</p>
+                                    
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="add-comment hidden">
+                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment">Post</button>
+                            </div>
+
+                            <p class="login-warning hidden">Log in to add a comment.</p>
+
+                        </article>
+
+                        <article class="org-post">
+                            <img src="/assets/CSO_TOP.jpg"
+                            alt="TOP 10 ORGS in DLSU"
+                            class="post-image lightbox-trigger">
+
+                            <div class="post-header">
+                                <h3>Top 10 Organizations Overall in DLSU</h3>
+                                <div class="post-actions hidden">
+                                    <button class="edit-post-btn">Edit</button>
+                                    <button class="delete-post-btn">Delete</button>
+                                </div>
+                            </div>
+                            <span class="post-date">February 7, 2026</span>
+                            <div class="post-content">
+                                Integrity and excellence continue to define our community as we inaugurate the 51st year of the Council of Student Organizations. We are proud to recognize the Top 10 organizations that have exhibited exceptional merit during the Term 1, A.Y. 2025-2026 Overall Accreditation Process. <br><br>
+
+                                This recognition reflects the passion, discipline, and collective effort you bring to your organizations and to the wider Lasallian community. May this milestone inspire fellow Lasallians to lead with integrity, serve with purpose, and strive for excellence. Congratulations! <br><br>
+
+                                #51stCSO <br>
+                                #AlwaysForService <br>
+                                #1CSO <br>
+                            </div>
+
+                            <button class="comment-toggle">View comments</button>
+                            <div class="comments hidden">
+
+                                <div class="comment" data-owner="lara_turk@dlsu.edu.ph">
+                                    <strong>Lara Turk</strong>
+                                    <p class="comment-text">🤗</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+
+                                <div class="comment" data-owner="cso@dlsu.edu.ph">
+                                    <strong>Council of Student Organizations</strong>
+                                    <p class="comment-text">Congratualtions to Everyone!!!</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="add-comment hidden">
+                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment">Post</button>
+                            </div>
+
+                            <p class="login-warning hidden">Log in to add a comment.</p>
+
+                        </article>
+
+                        <article class="org-post">
+                            <img src="/assets/CSO_HNY.jpg"
+                            alt="CSO Happy New Year"
+                            class="post-image lightbox-trigger">
+
+                            <div class="post-header">
+                                <h3>CSO Happy New Year</h3>
+                                <div class="post-actions hidden">
+                                    <button class="edit-post-btn">Edit</button>
+                                    <button class="delete-post-btn">Delete</button>
+                                </div>
+                            </div>
+                            <span class="post-date">January 1, 2026</span>
+
+                            <div class="post-content">
+                                Folding over the final day of the year, the Council of Student Organizations invites you to embrace the fresh start ahead.<br><br>
+
+                                As we transition into January, we look forward to a new year of excellence and service, walking alongside every Lasallian in our shared pursuit of student-led growth. <br><br>
+
+                                Happy New Year! 🎇 <br><br>
+
+                                #51stCSO <br>
+                                #AlwaysForService <br>
+                                #1CSO<br>
+                            </div>
+
+                            <button class="comment-toggle">View comments</button>
+                            <div class="comments hidden">
+                                <div class="comment" data-owner="aaliyah_pangan@dlsu.edu.ph">
+                                    <strong>Aaliyah Pangan</strong>
+                                    <p class="comment-text">Happy New Year🎇🎇!</p>
+                                    <div class="comment-actions hidden">
+                                        <button class="edit-comment-btn">Edit</button>
+                                        <button class="delete-comment-btn">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-comment hidden">
+                                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
+                                <button class="submit-comment">Post</button>
+                            </div>
+
+                            <p class="login-warning hidden">Log in to add a comment.</p>
+                        </article>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="create-post-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Create New Post</h3>
+
+            <input type="text" id="new-post-title" placeholder="Post title">
+
+            <textarea id="new-post-content" placeholder="Write your announcement..."></textarea>
+
+            <input type="file" id="new-post-image" accept="image/*">
+
+            <div class="modal-actions">
+                <button id="submit-post">Post</button>
+                <button id="cancel-post">Cancel</button>
+            </div>
+            </div>
+        </div>
+
+
+        <div id="js-lightbox" class="js-lightbox hidden">
+            <span class="js-lightbox-close">&times;</span>
+            <img src="" alt="Expanded view">
+        </div>
+
+        <script src="/script.js"></script>
+        
+    </body>
+</html>
+
+
+

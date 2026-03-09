@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<!--
+    references:
+    - https://www.cssportal.com/css-menu-generator/
+    - hero bg: https://www.dlsu.edu.ph/wp-content/uploads/2018/08/iv2.png
+    - https://www.w3schools.com/howto/howto_css_hero_image.asp
+-->
+
+<html>
+    <head>
+        <title>OrgSpace</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body>
+        <main>
+            <nav id="menu">
+                <span class="menu-title">DLSU Organizations</span>
+                <input type="checkbox" id="responsive-menu"><label></label>
+                <ul>
+                    <li><a href="/" class="active">Home</a></li>
+                    <li><a class="dropdown-arrow" href="#organizations">Organizations</a>
+                        <ul class="sub-menus">
+                            <li><a href="/org1">Archers for UNICEF</a></li>
+                            <li><a href="/org2">Council of Student Organizations</a></li>
+                            <li><a href="/org3">Information Security Organization</a></li>
+                            <li><a href="/org4">La Salle Computer Society</a></li>
+                            <li><a href="/org5">Management of Financial Institutions Association</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/contact">Contact Us</a></li>
+
+
+                    <li class="menu-profile" id="profileMenu">
+                        <button class="profile-btn" id="profileBtn" aria-haspopup="true" aria-expanded="false">
+                        <img src="/assets/profile-icon.png" alt="Account" class="profile-icon">
+                        </button>
+
+                        <ul class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Account menu"></ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>OrgSpace</h1>
+                    <p>Discover. Connect. Belong. </p>
+                    <a href="#faq" class="hero-btn">Learn More</a>
+                </div>
+            </div>
+            <section class="orgs-section" id="organizations">
+                <h1 class="orgs-title">ORGANIZATIONS</h1>
+                <div class="orgs-grid">
+                    <article class="org-card">
+                            <img src="/assets/AU_logo1.png" alt="AU">
+                        <div class="org-content">
+                            <h3>Archers for UNICEF</h3>
+                            <p class="org-text">Archers for UNICEF of De La Salle University-Manila is a non-profit organization that envisions a brighter and more inclusive future for Filipino youth and women. </p>
+                        </div>
+                        <a class="read-more" href="/org1">Know More</a>
+                    </article>
+                    <article class="org-card">
+                        <img src="/assets/cso.png" alt="CSO">
+                        <div class="org-content">
+                            <h3>Council of Student Organizations</h3>
+                            <p class="org-text">The Council of Student Organizations (CSO) is the official union and coordinating body of all duly accredited student organizations at De La Salle University (DLSU).</p>
+                        </div>
+                        <a class="read-more" href="/org2">Know More</a>
+                        </article>
+                    <article class="org-card">
+                        <img src="/assets/ISO_Logo.jpg" alt="ISO">
+                        <div class="org-content">
+                            <h3>Information Security Organization</h3>
+                            <p class="org-text">The Information Security Organization (ISO) is the sole cybersecurity-oriented student organization in De La Salle University, promoting proper cybersecurity practices and awareness.</p>
+                        </div>
+                        <a class="read-more" href="/org3">Know More</a>
+                    </article>
+                    <article class="org-card">
+                        <img src="/assets/40TH logo.png" alt="LSCS">
+                        <div class="org-content">
+                            <h3>La Salle Computer Society</h3>
+                            <p class="org-text">La Salle Computer Society (LSCS) is DLSU's largest and pioneering technological organization and the home organization of the College of Computer Studies.</p>
+                        </div>
+                        <a class="read-more" href="/org4">Know More</a>
+                    </article>
+                    <article class="org-card">
+                        <img src="/assets/mafia_logo1.png" alt="MaFIA">
+                        <div class="org-content">
+                            <h3>Management of Financial Institutions Association</h3>
+                            <p class="org-text">The Management of Financial Institutions Association (MaFIA) is a duly recognized professional organization of De La Salle University that caters to Management of Financial Institutions majors since its establishment in 1978.</p>
+                        </div>
+                        <a class="read-more" href="/org5">Know More</a>
+                    </article>
+                </div>
+            </section>
+            <section class="faq-section" id="faq">
+                <div class="faq-inner">
+                    <h1 class="faq title">Frequently Asked Questions</h1>
+                    <p class="faq-content">
+                        OrgSpace is designed to help students easily discover and stay updated with DLSU Organizations through a centralized platform.
+                        Below are some commonly asked questions regarding how the system works.
+                    </p>
+                    <div class="faq-list">
+                        <details class="faq-item">
+                            <summary>What is OrgSpace?</summary>
+                            <div class="faq-answer">
+                                OrgSpace is a hub where DLSU students can discover student organizations, learn what they do, and access updates in one place.
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Who can post announcements or updates?</summary>
+                            <div class="faq-answer">
+                                Only verified organizations can publish official posts to ensure the information is accurate and trusted.
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Who can use OrgSpace?</summary>
+                            <div class="faq-answer">
+                                All DLSU students can browse organization profiles. Organizations can manage their org profiles and publish posts.
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>How do I reach organizations?</summary>
+                            <div class="faq-answer">
+                                Each organization profile includes contact details and links to their official media pages or email addresses.
+                            </div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>I have a question. Who can I contact?</summary>
+                            <div class="faq-answer">
+                                You can message the OrgSpace team via the Contact Us page, or email the organization directly using the details on their page.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <script src="/script.js"></script>
+    </body>
+
+</html>

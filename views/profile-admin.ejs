@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Dashboard - OrgSpace</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body>
+        <main>
+            <nav id="menu">
+                <span class="menu-title">DLSU Organizations</span>
+                <input type="checkbox" id="responsive-menu"><label></label>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a class="dropdown-arrow" href="#organizations">Organizations</a>
+                        <ul class="sub-menus">
+                            <li><a href="/org1">Archers for UNICEF</a></li>
+                            <li><a href="/org2">Council of Student Organizations</a></li>
+                            <li><a href="/org3">Information Security Organization</a></li>
+                            <li><a href="/org4">La Salle Computer Society</a></li>
+                            <li><a href="/org5">Management of Financial Institutions Association</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/contact">Contact Us</a></li>
+                    <li class="menu-profile" id="profileMenu">
+                        <button class="profile-btn" id="profileBtn" aria-haspopup="true" aria-expanded="false">
+                        <img src="/assets/profile-icon.png" alt="Account" class="profile-icon">
+                        </button>
+                        <ul class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Account menu"></ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="profile-container" id="adminContent" style="display: none;">
+                <div class="admin-header">
+                    <h1 style="color: white; margin-bottom: 10px;">🛠️ Admin Dashboard</h1>
+                    <p style="opacity: 0.9;">Manage the OrgSpace platform and monitor system activities</p>
+                    <div style="margin-top: 20px; display: flex; gap: 15px;">
+                        <span style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px;">
+                            👑 System Administrator
+                        </span>
+                        <span style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px;">
+                            Last Login: Today, 09:30 AM
+                        </span>
+                    </div>
+                </div>
+
+                <div class="admin-stats">
+                    <div class="stat-card-admin">
+                        <div>👥</div>
+                        <h3 id="totalUsers">0</h3>
+                        <p>Total Users</p>
+                    </div>
+                    <div class="stat-card-admin">
+                        <div>🏢</div>
+                        <h3 id="totalOrgs">0</h3>
+                        <p>Organizations</p>
+                    </div>
+                    <div class="stat-card-admin">
+                        <div>📝</div>
+                        <h3 id="totalPosts">0</h3>
+                        <p>Total Posts</p>
+                    </div>
+                    <div class="stat-card-admin">
+                        <div>⏳</div>
+                        <h3 id="pendingApprovals">0</h3>
+                        <p>Pending Approvals</p>
+                    </div>
+                </div>
+
+                <div class="admin-grid">
+                    <div class="admin-section">
+                        <h3>📋 Pending Approvals</h3>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pendingTable"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="admin-section">
+                        <h3>📈 Recent Activities</h3>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Activity</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="activitiesTable"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="admin-section">
+                        <h3>👤 User Management</h3>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTable"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="admin-section">
+                        <h3>⚙️ System Health</h3>
+                        <div class="system-health">
+                            <div class="health-item">
+                                <span>Database Status</span>
+                                <span class="health-status healthy">✅ Operational</span>
+                            </div>
+                            <div class="health-item">
+                                <span>Server Uptime</span>
+                                <span class="health-status healthy">99.8%</span>
+                            </div>
+                            <div class="health-item">
+                                <span>Active Sessions</span>
+                                <span class="health-status" id="activeSessions">0</span>
+                            </div>
+                            <div class="health-item">
+                                <span>Storage Usage</span>
+                                <span class="health-status warning">78%</span>
+                            </div>
+                        </div>
+                        <button onclick="viewSystemLogs()" class="btn-action" style="margin-top: 20px;">
+                            🔍 View System Logs
+                        </button>
+                    </div>
+                </div>
+
+                <h3 style="color: #0B3D0B; margin-bottom: 20px;">⚡ Quick Actions</h3>
+                <div class="quick-actions-grid">
+                    <button onclick="addNewUser()" class="quick-action-btn">👤 Add New User</button>
+                    <button onclick="createAnnouncement()" class="quick-action-btn">📢 Create System Announcement</button>
+                    <button onclick="backupDatabase()" class="quick-action-btn">💾 Backup Database</button>
+                    <button onclick="generateReports()" class="quick-action-btn">📊 Generate Reports</button>
+                    <button onclick="managePermissions()" class="quick-action-btn">🔐 Manage Permissions</button>
+                    <button onclick="systemSettings()" class="quick-action-btn">⚙️ System Settings</button>
+                </div>
+            </div>
+
+            <div id="loadingMessage" style="text-align: center; padding: 50px;">
+                <p>Loading admin dashboard...</p>
+            </div>
+
+            <script src="/script.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    try {
+                        const userInfo = AuthGuard.protectPage('admin');
+                        
+                        if (userInfo) {
+                            document.getElementById('loadingMessage').style.display = 'none';
+                            document.getElementById('adminContent').style.display = 'block';
+                            
+                            initializeAdminDashboard(userInfo);
+                        }
+                    } catch (error) {
+                        console.error('Admin dashboard error:', error);
+                        document.getElementById('loadingMessage').innerHTML = 
+                            '<p style="color: #d32f2f;">Error loading dashboard. Redirecting...</p>';
+                        setTimeout(() => {
+                            window.location.href = "/login";
+                        }, 2000);
+                    }
+                });
+
+                function initializeAdminDashboard(userInfo) {
+                    // Demo admin data
+                    const adminData = {
+                        stats: {
+                            totalUsers: 425,
+                            totalOrgs: 25,
+                            totalPosts: 186,
+                            pendingApprovals: 7,
+                            activeSessions: 42
+                        },
+                        pendingApprovals: [
+                            { id: 1, name: "Entrepreneurship Society", type: "Organization", status: "pending" },
+                            { id: 2, name: "Maria Santos", type: "Student", status: "pending" },
+                            { id: 3, name: "Debate Club", type: "Organization", status: "pending" },
+                            { id: 4, name: "John Lim", type: "Student", status: "pending" }
+                        ],
+                        recentActivities: [
+                            { user: "CodeDH", activity: "Created new post", time: "10:30 AM" },
+                            { user: "Juan Dela Cruz", activity: "Logged in", time: "10:15 AM" },
+                            { user: "Archers for UNICEF", activity: "Updated profile", time: "09:45 AM" },
+                            { user: "Admin", activity: "Approved organization", time: "09:30 AM" },
+                            { user: "LSCS", activity: "Posted announcement", time: "09:15 AM" }
+                        ],
+                        users: [
+                            { id: 1, name: "Juan Dela Cruz", email: "juan.delacruz@dlsu.edu.ph", role: "Student" },
+                            { id: 2, name: "Maria Santos", email: "maria.santos@dlsu.edu.ph", role: "Student" },
+                            { id: 3, name: "John Lim", email: "john.lim@dlsu.edu.ph", role: "Student" },
+                            { id: 4, name: "CodeDH", email: "codedh@dlsu.edu.ph", role: "Organization" },
+                            { id: 5, name: "Archers for UNICEF", email: "au@dlsu.edu.ph", role: "Organization" },
+                            { id: 6, name: "LSCS", email: "lscs@dlsu.edu.ph", role: "Organization" }
+                        ]
+                    };
+
+                    document.getElementById('totalUsers').textContent = adminData.stats.totalUsers;
+                    document.getElementById('totalOrgs').textContent = adminData.stats.totalOrgs;
+                    document.getElementById('totalPosts').textContent = adminData.stats.totalPosts;
+                    document.getElementById('pendingApprovals').textContent = adminData.stats.pendingApprovals;
+                    document.getElementById('activeSessions').textContent = adminData.stats.activeSessions;
+
+                    const pendingTable = document.getElementById('pendingTable');
+                    adminData.pendingApprovals.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${escapeHtml(item.name)}</td>
+                            <td>${escapeHtml(item.type)}</td>
+                            <td><span class="status-pending">Pending</span></td>
+                            <td class="admin-actions">
+                                <button onclick="approveItem(${item.id})" class="btn-admin btn-approve">Approve</button>
+                                <button onclick="rejectItem(${item.id})" class="btn-admin btn-reject">Reject</button>
+                            </td>
+                        `;
+                        pendingTable.appendChild(row);
+                    });
+
+                    const activitiesTable = document.getElementById('activitiesTable');
+                    adminData.recentActivities.forEach(activity => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${escapeHtml(activity.user)}</td>
+                            <td>${escapeHtml(activity.activity)}</td>
+                            <td>${escapeHtml(activity.time)}</td>
+                        `;
+                        activitiesTable.appendChild(row);
+                    });
+
+                    const usersTable = document.getElementById('usersTable');
+                    adminData.users.forEach(user => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${escapeHtml(user.name)}</td>
+                            <td>${escapeHtml(user.email)}</td>
+                            <td><span class="tag">${escapeHtml(user.role)}</span></td>
+                            <td class="admin-actions">
+                                <button onclick="editUser(${user.id})" class="btn-admin btn-edit">Edit</button>
+                                <button onclick="deleteUser(${user.id})" class="btn-admin btn-delete">Delete</button>
+                            </td>
+                        `;
+                        usersTable.appendChild(row);
+                    });
+                }
+
+                function escapeHtml(text) {
+                    const div = document.createElement('div');
+                    div.textContent = text;
+                    return div.innerHTML;
+                }
+
+                function approveItem(id) {
+                    if (confirm('Approve this item?')) {
+                        alert(`Item ${id} approved!`);
+                    }
+                }
+
+                function rejectItem(id) {
+                    if (confirm('Reject this item?')) {
+                        alert(`Item ${id} rejected!`);
+                    }
+                }
+
+                function editUser(id) {
+                    alert(`Editing user ${id}...`);
+                }
+
+                function deleteUser(id) {
+                    if (confirm('Are you sure you want to delete this user?')) {
+                        alert(`User ${id} deleted!`);
+                    }
+                }
+
+                function viewSystemLogs() {
+                    alert('Opening system logs...');
+                }
+
+                function addNewUser() {
+                    alert('Opening new user form...');
+                }
+
+                function createAnnouncement() {
+                    alert('Creating system announcement...');
+                }
+
+                function backupDatabase() {
+                    alert('Starting database backup...');
+                }
+
+                function generateReports() {
+                    alert('Generating system reports...');
+                }
+
+                function managePermissions() {
+                    alert('Opening permission manager...');
+                }
+
+                function systemSettings() {
+                    alert('Opening system settings...');
+                }
+            </script>
+        </main>
+    </body>
+</html>

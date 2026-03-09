@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - OrgSpace</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <main>
+        <nav id="menu">
+            <span class="menu-title">DLSU Organizations</span>
+            <input type="checkbox" id="responsive-menu">
+            <label for="responsive-menu"></label>
+
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li>
+                    <a class="dropdown-arrow" href="#organizations">Organizations</a>
+                    <ul class="sub-menus">
+                        <li><a href="/org1">Archers for UNICEF</a></li>
+                        <li><a href="/org2">Council of Student Organizations</a></li>
+                        <li><a href="/org3">Information Security Organization</a></li>
+                        <li><a href="/org4">La Salle Computer Society</a></li>
+                        <li><a href="/org5">Management of Financial Institutions Association</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contact">Contact Us</a></li>
+                <li class="menu-profile" id="profileMenu">
+                    <button class="profile-btn" id="profileBtn" aria-haspopup="true" aria-expanded="false" type="button">
+                        <img src="/assets/profile-icon.png" alt="Account" class="profile-icon">
+                    </button>
+                    <ul class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Account menu"></ul>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="auth-section">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h1>Sign In</h1>
+                        <p>Access your OrgSpace account</p>
+                    </div>
+
+                    <% if (typeof error !== 'undefined' && error) { %>
+                        <div class="error-message" style="margin-bottom: 20px; padding: 12px 14px; background: #fdeaea; color: #b00020; border: 1px solid #f5c2c7; border-radius: 10px;">
+                            <%= error %>
+                        </div>
+                    <% } %>
+
+                    <form id="loginForm" class="auth-form active-form" action="/login" method="POST">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="your.email@dlsu.edu.ph"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userType">I am a:</label>
+                            <select id="userType" name="userType" required>
+                                <option value="">Select user type</option>
+                                <option value="student">Student</option>
+                                <option value="organization">Organization</option>
+                                <option value="admin">Administrator</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="auth-submit-btn">
+                            Sign In
+                        </button>
+                    </form>
+
+                    <div class="auth-footer">
+                        <p>Don't have an account? <a href="/register">Sign up here</a></p>
+                        <p><a href="/">← Back to Home</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="/script.js"></script>
+    </main>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Student Profile - OrgSpace</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+
+    <body>
+        <main>
+            <nav id="menu">
+                <span class="menu-title">DLSU Organizations</span>
+                <input type="checkbox" id="responsive-menu"><label></label>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a class="dropdown-arrow" href="#organizations">Organizations</a>
+                        <ul class="sub-menus">
+                            <li><a href="/org1">Archers for UNICEF</a></li>
+                            <li><a href="/org2">Council of Student Organizations</a></li>
+                            <li><a href="/org3">Information Security Organization</a></li>
+                            <li><a href="/org4">La Salle Computer Society</a></li>
+                            <li><a href="/org5">Management of Financial Institutions Association</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/contact">Contact Us</a></li>
+                    <li class="menu-profile" id="profileMenu">
+                        <button class="profile-btn" id="profileBtn" aria-haspopup="true" aria-expanded="false">
+                        <img src="/assets/profile-icon.png" alt="Account" class="profile-icon">
+                        </button>
+                        <ul class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Account menu"></ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="profile-container" id="profileContent" style="display: none;">
+                <div class="profile-header" style="display: flex; align-items: center; gap: 30px;">
+                    <img id="profileImage" src="" alt="Profile" class="profile-pic-large">
+                    <div>
+                        <h1 id="studentName" style="color: white; margin-bottom: 10px;"></h1>
+                        <p id="studentCourse" style="font-size: 1.1rem; opacity: 0.9;"></p>
+                        <div class="profile-actions">
+                            <button onclick="editProfile()" class="btn-action">✏️ Edit Profile</button>
+                            <button onclick="viewOrganizations()" class="btn-action">🏢 Browse Organizations</button>
+                            <button onclick="viewEvents()" class="btn-action">📅 View Events</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div>🎯</div>
+                        <h4 id="organizationsJoined">0</h4>
+                        <p>Organizations Joined</p>
+                    </div>
+                    <div class="stat-card">
+                        <div>📅</div>
+                        <h4 id="upcomingEvents">0</h4>
+                        <p>Upcoming Events</p>
+                    </div>
+                    <div class="stat-card">
+                        <div>💬</div>
+                        <h4 id="commentsMade">0</h4>
+                        <p>Comments Made</p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Personal Information</h3>
+                        <p><strong>🎓 Student ID:</strong> <span id="studentId"></span></p>
+                        <p><strong>📧 Email:</strong> <span id="studentEmail"></span></p>
+                        <p><strong>📅 Year Level:</strong> <span id="studentYear"></span></p>
+                        <p><strong>🏫 College:</strong> <span id="studentCollege">College of Computer Studies</span></p>
+                        <div style="margin-top: 20px;">
+                            <h4 style="color: #046307; margin-bottom: 10px;">Status</h4>
+                            <span class="tag" style="background: #4caf50;">Active Student</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Account Settings</h3>
+                        <p><strong>🔐 Last Login:</strong> <span id="lastLogin">Today, 09:30 AM</span></p>
+                        <p><strong>📱 Notification:</strong> <span id="notifications">Enabled</span></p>
+                        <div style="margin-top: 20px;">
+                            <h4 style="color: #046307; margin-bottom: 10px;">Quick Actions</h4>
+                            <button onclick="changePassword()" class="btn-action" style="margin-bottom: 10px; width: 100%;">
+                                🔐 Change Password
+                            </button>
+                            <button onclick="logout()" class="btn-action" style="background: #f44336; width: 100%;">
+                                🚪 Logout
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Joined Organizations</h3>
+                        <div id="organizationsList">
+                            <p>🏹 <strong>Archers for UNICEF</strong> - Member since 2025</p>
+                            <p>💻 <strong>La Salle Computer Society</strong> - Member since 2024</p>
+                            <p>🔒 <strong>Information Security Organization</strong> - Member since 2024</p>
+                        </div>
+                        <button onclick="browseOrganizations()" class="btn-action" style="margin-top: 15px; width: 100%;">
+                            🔍 Browse More Organizations
+                        </button>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Recent Activities</h3>
+                        <div id="recentActivities">
+                            <p>💬 <strong>Commented</strong> on AU 2nd General Assembly - Today</p>
+                            <p>📝 <strong>Registered</strong> for LSCS Hackathon - Yesterday</p>
+                            <p>🏹 <strong>Joined</strong> Archers for UNICEF - Last week</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #e9f5e9; padding: 25px; border-radius: 14px; border: 2px solid #046307; margin-top: 30px;">
+                    <h3 style="color: #046307; margin-bottom: 15px;">Quick Actions</h3>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <button onclick="browseOrganizations()" class="btn-action">🏢 Browse Organizations</button>
+                        <button onclick="viewCalendar()" class="btn-action">📅 View Event Calendar</button>
+                        <button onclick="viewMessages()" class="btn-action">💬 View Messages</button>
+                        <button onclick="viewNotifications()" class="btn-action">🔔 Notifications</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loadingMessage" style="text-align: center; padding: 50px;">
+                <p>Loading student profile...</p>
+            </div>
+
+            <div id="editModal" class="modal-overlay">
+                <div class="modal-content">
+                    <span class="close-modal" onclick="closeEditModal()">&times;</span>
+                    <h2>Edit Student Profile</h2>
+                    <form id="editStudentForm">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" id="editFirstName">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" id="editLastName">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Student ID</label>
+                            <input type="text" id="editStudentId" disabled>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Course</label>
+                            <input type="text" id="editCourse">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Year Level</label>
+                            <select id="editYearLevel">
+                                <option value="1">1st Year</option>
+                                <option value="2">2nd Year</option>
+                                <option value="3">3rd Year</option>
+                                <option value="4">4th Year</option>
+                                <option value="5">5th Year</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" onclick="closeEditModal()" class="btn-secondary">Cancel</button>
+                            <button type="button" onclick="saveStudentProfile()" class="btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <script src="/script.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    try {
+                        const userInfo = AuthGuard.protectPage('student');
+                        
+                        if (userInfo) {
+                            document.getElementById('loadingMessage').style.display = 'none';
+                            document.getElementById('profileContent').style.display = 'block';
+                            
+                            initializeProfile(userInfo.user);
+                        }
+                    } catch (error) {
+                        console.error('Profile error:', error);
+                        document.getElementById('loadingMessage').innerHTML = 
+                            '<p style="color: #d32f2f;">Error loading profile. Redirecting...</p>';
+                        setTimeout(() => {
+                            window.location.href = "/login";
+                        }, 2000);
+                    }
+                });
+
+                function initializeProfile(user) {
+                    // Demo student data
+                    const studentData = {
+                        firstName: user.firstName || "Juan",
+                        lastName: user.lastName || "Dela Cruz",
+                        studentId: user.studentId || "12345678",
+                        email: user.email || "juan.delacruz@dlsu.edu.ph",
+                        course: user.course || "BS Computer Science",
+                        yearLevel: user.yearLevel || 3,
+                        profileImage: user.profileImage || "https://api.dicebear.com/9.x/adventurer/svg?seed=Jocelyn",
+                        organizationsJoined: 3,
+                        upcomingEvents: 2,
+                        commentsMade: 15,
+                        lastLogin: "Today, 09:30 AM",
+                        notifications: "Enabled"
+                    };
+
+                    document.getElementById('profileImage').src = studentData.profileImage;
+                    document.getElementById('studentName').textContent = escapeHtml(`${studentData.firstName} ${studentData.lastName}`);
+                    document.getElementById('studentCourse').textContent = escapeHtml(studentData.course);
+                    document.getElementById('studentId').textContent = escapeHtml(studentData.studentId);
+                    document.getElementById('studentEmail').textContent = escapeHtml(studentData.email);
+                    document.getElementById('studentYear').textContent = escapeHtml(`Year ${studentData.yearLevel}`);
+                    document.getElementById('organizationsJoined').textContent = escapeHtml(studentData.organizationsJoined.toString());
+                    document.getElementById('upcomingEvents').textContent = escapeHtml(studentData.upcomingEvents.toString());
+                    document.getElementById('commentsMade').textContent = escapeHtml(studentData.commentsMade.toString());
+                    document.getElementById('lastLogin').textContent = escapeHtml(studentData.lastLogin);
+                    document.getElementById('notifications').textContent = escapeHtml(studentData.notifications);
+                }
+
+                function escapeHtml(text) {
+                    if (typeof text !== 'string') return text;
+                    const div = document.createElement('div');
+                    div.textContent = text;
+                    return div.innerHTML;
+                }
+
+                function openEditModal() {
+                    const fullName = document.getElementById('studentName').textContent;
+                    const course = document.getElementById('studentCourse').textContent;
+                    const yearText = document.getElementById('studentYear').textContent;
+                    
+                    const nameParts = fullName.split(' ');
+                    const firstName = nameParts[0] || '';
+                    const lastName = nameParts.slice(1).join(' ') || '';
+                    
+                    const yearMatch = yearText.match(/Year (\d+)/);
+                    const yearLevel = yearMatch ? yearMatch[1] : '3';
+                    
+                    document.getElementById('editFirstName').value = firstName;
+                    document.getElementById('editLastName').value = lastName;
+                    document.getElementById('editStudentId').value = document.getElementById('studentId').textContent;
+                    document.getElementById('editCourse').value = course;
+                    document.getElementById('editYearLevel').value = yearLevel;
+                    
+                    document.getElementById('editModal').style.display = 'flex';
+                }
+
+                function closeEditModal() {
+                    document.getElementById('editModal').style.display = 'none';
+                }
+
+                function saveStudentProfile() {
+                    const firstName = document.getElementById('editFirstName').value;
+                    const lastName = document.getElementById('editLastName').value;
+                    const course = document.getElementById('editCourse').value;
+                    const yearLevel = document.getElementById('editYearLevel').value;
+                    
+                    if (!firstName.trim() || !lastName.trim() || !course.trim()) {
+                        alert('All fields are required!');
+                        return;
+                    }
+
+                    document.getElementById('studentName').textContent = escapeHtml(`${firstName} ${lastName}`);
+                    document.getElementById('studentCourse').textContent = escapeHtml(course);
+                    document.getElementById('studentYear').textContent = escapeHtml(`Year ${yearLevel}`);
+                    
+                    closeEditModal();
+                    
+                    alert('Profile updated successfully! (Changes are for demo only)');
+                }
+
+                function editProfile() {
+                    openEditModal();
+                }
+
+                function logout() {
+                    if (typeof auth !== 'undefined') {
+                        auth.logout();
+                        window.location.href = "/login";
+                    }
+                }
+
+                function viewOrganizations() {
+                    window.location.href = "/#organizations";
+                }
+
+                function viewEvents() {
+                    alert('Opening event calendar...');
+                }
+
+                function browseOrganizations() {
+                    window.location.href = '/#organizations';
+                }
+
+                function changePassword() {
+                    alert('Change password feature coming soon!');
+                }
+
+                function viewCalendar() {
+                    alert('Opening event calendar...');
+                }
+
+                function viewMessages() {
+                    alert('Opening messages...');
+                }
+
+                function viewNotifications() {
+                    alert('Opening notifications...');
+                }
+
+                window.addEventListener('click', function(event) {
+                    const modal = document.getElementById('editModal');
+                    if (event.target === modal) {
+                        closeEditModal();
+                    }
+                });
+
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'Escape') {
+                        closeEditModal();
+                    }
+                });
+            </script>
+        </main>
+    </body>
+</html>

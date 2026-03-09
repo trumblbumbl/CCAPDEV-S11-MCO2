@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<!--
+    references:
+    - https://www.geeksforgeeks.org/javascript/create-a-product-review-and-rating-system-using-html-css-and-javascript/
+    - https://www.youtube.com/watch?v=sQymxd983CM
+-->
+
+<html>
+    <head>
+        <title>Org Reviews | OrgSpace</title>
+        <link rel="stylesheet" href="/style.css">   
+    </head>
+
+    <body>
+        <main>
+            <!-- NAV BAR -->
+            <nav id="menu">
+                <span class="menu-title">DLSU Organizations</span>
+                <input type="checkbox" id="responsive-menu"><label></label>
+                <ul>
+                    <li><a href="/" class="active">Home</a></li>
+                    <li><a class="dropdown-arrow" href="#organizations">Organizations</a>
+                        <ul class="sub-menus">
+                            <li><a href="/org1">Archers for UNICEF</a></li>
+                            <li><a href="/org2">Council of Student Organizations</a></li>
+                            <li><a href="/org3">Information Security Organization</a></li>
+                            <li><a href="/org4">La Salle Computer Society</a></li>
+                            <li><a href="/org5">Management of Financial Institutions Association</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/contact">Contact Us</a></li>
+
+
+                    <li class="menu-profile" id="profileMenu">
+                        <button class="profile-btn" id="profileBtn" aria-haspopup="true" aria-expanded="false">
+                        <img src="/assets/profile-icon.png" alt="Account" class="profile-icon">
+                        </button>
+
+                        <ul class="profile-dropdown" id="profileDropdown" role="menu" aria-label="Account menu"></ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- PAGE HEADER -->
+            <section class="reviews-header">
+                <h1>Information Security Organization (ISO) Reviews</h1>
+                <p>See what students are saying and share your experience.</p>
+            </section>
+
+            <!-- REVIEWS WRAPPER -->
+            <div id="reviewsContainer">
+
+                <!-- RATING SUMMARY -->
+                <div class="rating-summary">
+                    <div class="average-score">
+                        <span id="averageRating">0.0</span>
+                        <div class="average-stars" id="averageStars"></div>
+                        <small id="totalReviews">(0 reviews)</small>
+                    </div>
+
+                    <div class="rating-filters">
+                        <button data-filter="all" class="active">All</button>
+                        <button data-filter="5">5 ★</button>
+                        <button data-filter="4">4 ★</button>
+                        <button data-filter="3">3 ★</button>
+                        <button data-filter="2">2 ★</button>
+                        <button data-filter="1">1 ★</button>
+                    </div>
+                </div>
+
+                <!-- REVIEW FORM -->
+                <section class="reviews-section">
+                    <div class="review-card">
+                        <div class="review-user">
+                            Logged in as: <strong id="currentUser"></strong>
+                        </div>
+
+                        <div class="star-rating" id="starRating">
+                            <span data-value="1">★</span>
+                            <span data-value="2">★</span>
+                            <span data-value="3">★</span>
+                            <span data-value="4">★</span>
+                            <span data-value="5">★</span>
+                        </div>
+
+                        <textarea id="reviewText" placeholder="Write your review here..."></textarea>
+
+                        <button class="submit-review" id="submitReview">
+                            Submit Review
+                        </button>
+                    </div>
+
+                    <!-- REVIEW LIST -->
+                    <div class="reviews-list" id="reviewsList"></div>
+                </section>
+
+            </div>
+
+            <!-- LOGIN WARNING -->
+            <p id="reviewsLoginWarning" class="hidden" style="text-align:center; margin-top:20px;">
+                Please log in to view and submit reviews.
+            </p>
+        </main>
+
+        <script src="/script.js"></script> 
+    </body>
+</html>
