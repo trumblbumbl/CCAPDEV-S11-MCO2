@@ -15,12 +15,47 @@ The system allows official organization accounts to create and manage their own 
 - Store organization data in a database
 - Simple and user-friendly interface
 
-## Technologies Used
+## Project Structure
+```
+CCAPDEV-S11-MCO2/
+├── config/                          ←---- database connection
+│   └── db.js                        
+├── controllers/                     ←---- website logic and coordinates models/views
+│   ├── adminController.js           
+│   ├── authController.js            
+│   ├── commentController.js        
+│   ├── orgController.js             
+│   └── profileController.js         
+├── middleware/                      ←---- functions for req-res cycle
+│   └── authMiddleware.js            
+├── models/                           ←---- database schemas
+│   ├── Comment.js
+│   └── User.js
+├── node_modules/                     ←---- contains all installed dependencies
+├── public/                           ←---- html, css, assets
+├── routes/                           ←---- endpoints map to controller functions
+│   ├── adminRoutes.js
+│   ├── authRoutes.js
+│   ├── commentRoutes.js
+│   ├── orgRoutes.js
+│   └── profileRoutes.js
+├── views/                            ←---- front-end rendered by server and sent as html
+├── package-lock.json                 ←---- 
+├── package.json
+├── README.md
+├── seed.js                           ←---- populates with data
+└── server.js    
+```
+
+## Prequisites and Technologies Used
 
 - HTML
 - CSS
 - JavaScript
-- MongoDB
+- MongoDB and Compass
+- Node.js
+- Npm
+
 
 ## Database Overview
 
@@ -38,14 +73,75 @@ The database stores information such as:
 
 ## How to Run the Project
 
-1. Clone the repository from GitHub or download the ZIP file.
-2. Open the project folder in your code editor.
-3. Open the terminal inside the project folder.
-4. Install the required dependencies by running npm install.
-5. Make sure that MongoDB is running locally on your computer.
-6. Run node seed.js to populate the database with the sample users.
-7. Start the application by running node server.js.
-8.  Open your browser and go to http://localhost:3000 to access the website.
+Running in Windows
+
+1. Clone the repository
+```
+git clone https://github.com/sxmsnchz/CCAPDEV-S11-MCO2.git
+cd CCAPDEV-S11-MCO2
+```
+
+2. Install dependencies
+- mongodb: https://www.mongodb.com/try/download/community
+- npm, node.js: https://nodejs.org/en
+
+3. Create Connection and Database in MongoDB
+- You may need to edit connection string in /config/db.js
+
+4. Run program
+```
+npm start
+```
+
+
+Running in WSL (Windows Subsystem for Linux)
+
+1. Install dependencies
+- prepare packages
+```
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl -y
+```
+
+- npm, node.js
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+nvm install --lts
+node -v
+npm -v
+```
+
+- MongoDB
+```
+curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+sudo apt update && sudo apt install -y mongodb-org
+sudo systemctl start mongod
+mongod --version
+```
+
+- Compass (in Powershell terminal as Admin)
+```
+winget install --id=MongoDB.Compass.Full -e
+```
+
+2. Clone the repository
+```
+git clone https://github.com/sxmsnchz/CCAPDEV-S11-MCO2.git
+cd CCAPDEV-S11-MCO2
+```
+
+3. Run MongoDB 
+```
+sudo systemctl start mongod
+sudo systemctl status mongod
+```
+- Open Compass in PC and start connection
+
+4. Run program
+```
+npm start
+```
 
 ## Contributors
 
