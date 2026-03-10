@@ -183,9 +183,33 @@
                                 <% if (post3Comments.length > 0) { %>
                                     <% post3Comments.forEach(comment => { %>
                                     <div class="comment">
-                                        <strong><%= comment.user ? comment.user.email : "User" %></strong>
+                                        <div class="comment-header">
+                                            <strong>
+                                                <%= comment.user ? (comment.user.firstName + " " + comment.user.lastName) : "User" %>
+                                            </strong>
+
+                                            <% if (user && comment.user && (comment.user._id.toString() === user.id || user.userType === "admin")) { %>
+                                            <div class="comment-actions">
+
+                                                <button class="edit-comment-btn">Edit</button>
+
+                                                <form action="/delete-comment/<%= comment._id %>" method="POST">
+                                                    <button type="submit" class="delete-comment-btn">Delete</button>
+                                                </form>
+
+                                            </div>
+                                            <% } %>
+                                        </div>
+
                                         <p class="comment-text"><%= comment.text %></p>
+
+                                        <form action="/edit-comment/<%= comment._id %>" method="POST" class="edit-comment-form hidden">
+                                            <input type="text" name="text" value="<%= comment.text %>" required>
+                                            <button type="submit">Save</button>
+                                        </form>
+
                                     </div>
+
                                 <% }) %>
                             <% } else { %>
                             <p>No comments yet.</p>
@@ -195,7 +219,7 @@
                             <form action="/add-comment" method="POST" class="add-comment">
                             <textarea name="text" class="comment-input" placeholder="Write a comment..."></textarea>
                             <input type="hidden" name="page" value="org1">
-                            <input type="hidden" name="postId" value="post1">
+                            <input type="hidden" name="postId" value="post3">
                             <button type="submit" class="submit-comment">Post</button>
                             </form>
                             <% } else { %>
@@ -257,7 +281,7 @@
                             <form action="/add-comment" method="POST" class="add-comment">
                             <textarea name="text" class="comment-input" placeholder="Write a comment..."></textarea>
                             <input type="hidden" name="page" value="org1">
-                            <input type="hidden" name="postId" value="post1">
+                            <input type="hidden" name="postId" value="post2">
                             <button type="submit" class="submit-comment">Post</button>
                             </form>
                             <% } else { %>
