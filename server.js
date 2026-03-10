@@ -53,6 +53,10 @@ const commentSchema = new mongoose.Schema({
   page: {
     type: String
   },
+  
+  post: {
+    type:String
+  },
 
   createdAt: {
     type: Date,
@@ -469,7 +473,7 @@ app.post("/add-comment", async (req, res) => {
 
     await newComment.save();
 
-    res.redirect("back");
+    res.redirect(req.get("referer") || "/");
 
   } catch (error) {
 
@@ -478,6 +482,74 @@ app.post("/add-comment", async (req, res) => {
 
   }
 
+});
+
+
+app.post("/edit-comment/:id", async (req, res) => {
+  try {
+
+    const comment = await Comment.findById(req.params.id);
+
+    if (!comment) {
+      return res.send("Comment not found");
+    }
+
+    const user = req.session.user;
+
+    if (!user) {
+      return res.redirect("/login");
+    }
+
+    // Only owner OR admin
+    if (
+      comment.user.toString() !== user.id &&
+      user.userType !== "admin"
+    ) {
+      return res.send("Unauthorized");
+    }
+
+    comment.text = req.body.text;
+    await comment.save();
+
+    res.redirect(req.get("referer") || "/");
+
+  } catch (error) {
+    console.error(error);
+    res.send("Error editing comment");
+  }
+});
+
+app.post("/delete-comment/:id", async (req, res) => {
+  try {
+
+    const comment = await Comment.findById(req.params.id);
+
+    if (!comment) {
+      return res.send("Comment not found");
+    }
+
+    const user = req.session.user;
+
+    if (!user) {
+      return res.redirect("/login");
+    }
+
+    // Only owner OR admin
+    if (
+      comment.user.toString() !== user.id &&
+      user.userType !== "admin"
+    ) {
+      return res.send("Unauthorized");
+    }
+
+    await Comment.findByIdAndDelete(req.params.id);
+
+    res.redirect(req.get("referer") || "/");
+
+  } catch (error) {
+    console.error(error);
+    res.send("Error deleting comment");
+  }
 });
 
 // ======================
@@ -504,3 +576,4 @@ const port = 3000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
