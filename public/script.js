@@ -327,6 +327,20 @@ const canManagePosts =
 
 let displayName = "Guest";
 
+document.querySelectorAll(".org-post").forEach(post => {
+    const addCommentBox = post.querySelector(".add-comment");
+    const warning = post.querySelector(".login-warning");
+
+    if (isLoggedIn) {
+        addCommentBox?.classList.remove("hidden");
+        warning?.classList.add("hidden");
+    } else {
+        addCommentBox?.classList.add("hidden");
+        warning?.classList.remove("hidden");
+    }
+});
+
+
 if (isLoggedIn && session.user) {
     if (userRole === "student") {
         displayName = `${session.user.firstName} ${session.user.lastName}`;
@@ -477,47 +491,6 @@ if (isLoggedIn && session.user) {
 
     document.querySelectorAll(".comment").forEach(applyCommentPermissions);
     
-    document.querySelectorAll(".org-post").forEach(post => {
-        const addCommentBox = post.querySelector(".add-comment");
-        const warning = post.querySelector(".login-warning");
-        const submitBtn = post.querySelector(".submit-comment");
-        const textarea = post.querySelector(".comment-input");
-        const commentsContainer = post.querySelector(".comments");
-
-        // visibility
-        if (isLoggedIn) {
-            addCommentBox?.classList.remove("hidden");
-            warning?.classList.add("hidden");
-        } else {
-            addCommentBox?.classList.add("hidden");
-            warning?.classList.remove("hidden");
-        }
-
-        // submit comment
-        submitBtn?.addEventListener("click", () => {
-            const text = textarea.value.trim();
-            if (!text) return;
-
-            const comment = document.createElement("div");
-            comment.className = "comment";
-            comment.dataset.owner = currentUser;
-
-            comment.innerHTML = `
-                <strong>${displayName}</strong>
-                <p class="comment-text">${text}</p>
-                <div class="comment-actions hidden">
-                    <button class="edit-comment-btn">Edit</button>
-                    <button class="delete-comment-btn">Delete</button>
-                </div>
-            `;
-
-            commentsContainer.appendChild(comment);
-            textarea.value = "";
-
-            applyCommentPermissions(comment);
-        });
-    });
-
     //create post
     const createBtn = document.getElementById("create-post-btn");
     const modal = document.getElementById("create-post-modal");
@@ -661,6 +634,7 @@ if (isLoggedIn && session.user) {
 
 // FOR MENU
 
+
 const profileBtn = document.getElementById("profileBtn");
 const profileDropdown = document.getElementById("profileDropdown");
 const profileMenu = document.getElementById("profileMenu");
@@ -669,44 +643,50 @@ function renderProfileMenu() {
     profileDropdown.innerHTML = "";
 
     fetch("/session")
-        .then(res => res.json())
-        .then(session => {
-            if (session.isLoggedIn) {
-                profileDropdown.innerHTML = `
-                    <li><button type="button" id="profBtn">Profile</button></li>
-                    <li><button type="button" id="signOutBtn">Sign Out</button></li>
-                `;
+    .then(res => res.json())
+    .then(session => {
 
-                document.getElementById("profBtn").addEventListener("click", () => {
-                    switch (session.userType) {
-                        case "student":
-                            window.location.href = "/profile-student";
-                            break;
-                        case "organization":
-                            window.location.href = "/profile-organization";
-                            break;
-                        case "admin":
-                            window.location.href = "/profile-admin";
-                            break;
-                        default:
-                            window.location.href = "/";
-                    }
-                });
 
-                document.getElementById("signOutBtn").addEventListener("click", () => {
-                    closeProfileDropdown();
-                    window.location.href = "/logout";
-                });
-            } else {
-                profileDropdown.innerHTML = `
-                    <li><a href="/login">Sign In</a></li>
-                `;
-            }
-        })
-        .catch(error => {
-            console.error("Session check error:", error);
+    if (session.isLoggedIn) {
+        profileDropdown.innerHTML= `
+        <li><button type="button" id="profBtn">Profile</button></li>
+        <li><button type="button" id="signOutBtn">Sign Out</button></li>
+        `;
+
+    document.getElementById("profBtn").addEventListener("click", () => {
+
+    switch (session.userType) {
+        case "student":
+            window.location.href = "/profile-student";
+            break;
+
+        case "organization":
+            window.location.href = "/profile-organization";
+            break;
+
+        case "admin":
+            window.location.href = "/profile-admin";
+            break;
+
+        default:
+            window.location.href = "/";
+    }
+
+});
+
+        document.getElementById("signOutBtn").addEventListener("click", () => {
+            auth.logout();
+            closeProfileDropdown();
+            renderProfileMenu();
+            window.location.href = "/";
         });
-}
+    } else {
+        profileDropdown.innerHTML = `
+        <li><a href="/login">Sign In</a></li>
+        `;
+    }
+})}; 
+
 function toggleProfileDropdown() {
     profileDropdown.classList.toggle("open");
 }
@@ -960,4 +940,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 //------ END OF REVIEWS PAGE JS PORTION ------
-
