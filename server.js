@@ -337,9 +337,6 @@ app.post("/login", async (req, res) => {
   }
 });
 
-
-// EDIT PROFILE
-
 app.post("/edit-profile/student", async (req, res) => {
   try {
     if (!req.session.user) {
@@ -373,7 +370,7 @@ app.post("/edit-profile/student", async (req, res) => {
         email,
         college
       },
-      { returnDocument: "after" } 
+      { returnDocument: "after" }
     );
 
     if (!updatedUser) {
@@ -383,11 +380,14 @@ app.post("/edit-profile/student", async (req, res) => {
       });
     }
 
+    req.session.user.email = updatedUser.email;
+    req.session.user.firstName = updatedUser.firstName || "";
+    req.session.user.lastName = updatedUser.lastName || "";
+
     res.json({
       success: true,
       message: "Profile updated successfully."
     });
-
   } catch (error) {
     console.error("EDIT PROFILE STUDENT ERROR:", error);
     res.status(500).json({
@@ -442,6 +442,9 @@ app.post("/edit-profile/organization", async (req, res) => {
       });
     }
 
+    req.session.user.email = updatedUser.email;
+    req.session.user.orgName = updatedUser.orgName || "";
+
     res.json({
       success: true,
       message: "Organization profile updated successfully."
@@ -454,7 +457,6 @@ app.post("/edit-profile/organization", async (req, res) => {
     });
   }
 });
-
 
 // ======================
 // ADD COMMENT
