@@ -40,7 +40,7 @@ CCAPDEV-S11-MCO2/
 │   ├── orgRoutes.js
 │   └── profileRoutes.js
 ├── views/                            ←---- front-end rendered by server and sent as html
-├── package-lock.json                 ←---- 
+├── package-lock.json                 ←---- locks exact versions of dependencies
 ├── package.json
 ├── README.md
 ├── seed.js                           ←---- populates with data
