@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const isOrgOwner =
         userRole === "organization" &&
-        currentUser === pageOrg;
+        session.user.email === pageOrg;
 
     const canManagePosts =
         userRole === "admin" || isOrgOwner;
@@ -72,7 +72,48 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 });
 
+// ===== LIKE BUTTON FUNCTIONALITY =====
+document.querySelectorAll('.like-btn').forEach(function(button) {
+    // Set initial liked state
+    const likedByUser = button.dataset.likedByUser === 'true';
+    if (likedByUser) {
+        button.style.background = 'rgba(4, 99, 7, 0.1)';
+    }
+    
+    button.addEventListener('click', async function(e) {
+        e.preventDefault();
+        const postId = this.dataset.postId;
+        const likeCountSpan = this.querySelector('.like-count');
+        
+        try {
+            const response = await fetch('/posts/like/' + postId, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error('Server error');
+            }
+            
+            const data = await response.json();
+            likeCountSpan.textContent = data.likes;
+            
+            // Toggle liked state visually
+            if (data.liked) {
+                this.style.background = 'rgba(4, 99, 7, 0.1)';
+            } else {
+                this.style.background = 'none';
+            }
+            
+        } catch (error) {
+            console.error('Error liking post:', error);
+        }
+    });
+});
 
+    
     // Lightbox
     const lightbox = document.getElementById("js-lightbox");
     const lightboxImg = lightbox?.querySelector("img");
@@ -100,6 +141,248 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
+    // ===== CREATE POST FUNCTIONALITY - MUST COME FIRST =====
+    const createBtn = document.getElementById("create-post-btn");
+    const modal = document.getElementById("create-post-modal");
+    const submitPost = document.getElementById("submit-post");
+    const cancelPost = document.getElementById("cancel-post");
+
+    const titleInput = document.getElementById("new-post-title");
+    const contentInput = document.getElementById("new-post-content");
+    const imageInput = document.getElementById("new-post-image");
+
+    const postsContainer = document.querySelector(".org-posts");
+
+    console.log('Create button found:', createBtn); // Debug
+
+    // ===== IMAGE SELECTOR FUNCTIONALITY =====
+    const imageSelectorModal = document.getElementById("image-selector-modal");
+    const selectImageBtn = document.getElementById("select-image-btn");
+    const closeImageSelector = document.getElementById("close-image-selector");
+    const imageGrid = document.querySelector(".image-grid");
+    const selectedImageName = document.getElementById("selected-image-name");
+    const newPostImage = document.getElementById("new-post-image");
+    const imagePreview = document.getElementById("image-preview");
+    const previewImg = imagePreview?.querySelector("img");
+    const removeImageBtn = document.getElementById("remove-image-btn");
+
+    // List of images in your assets folder
+    const availableImages = [
+        { name: "AU Logo", path: "/assets/au_logo1.png" },
+        { name: "AU 2nd GA", path: "/assets/AU_2ndGA.jpg" },
+        { name: "AU WCD", path: "/assets/AU_WCD.jpg" },
+        { name: "AU MAUgic", path: "/assets/AU_MAUgic.jpg" },
+        { name: "AU Highlight 1", path: "/assets/AU1.jpg" },
+        { name: "AU Highlight 2", path: "/assets/AU2.jpg" },
+        { name: "AU Highlight 3", path: "/assets/AU3.jpg" }
+    ];
+
+    // Open image selector
+    selectImageBtn?.addEventListener("click", () => {
+        // Populate image grid
+        imageGrid.innerHTML = "";
+        availableImages.forEach(img => {
+            const imgDiv = document.createElement("div");
+            imgDiv.className = "image-option";
+            imgDiv.style.cssText = "cursor: pointer; border: 2px solid transparent; border-radius: 8px; overflow: hidden; transition: all 0.2s;";
+            imgDiv.innerHTML = `
+                <img src="${img.path}" alt="${img.name}" style="width: 100%; height: 120px; object-fit: cover;">
+                <p style="text-align: center; margin: 5px 0; font-size: 0.9rem;">${img.name}</p>
+            `;
+            
+            imgDiv.addEventListener("click", () => {
+                // Select this image
+                newPostImage.value = img.path;
+                selectedImageName.textContent = img.name;
+                
+                // Show preview
+                previewImg.src = img.path;
+                imagePreview.style.display = "block";
+                
+                // Close selector
+                imageSelectorModal.classList.add("hidden");
+            });
+            
+            imageGrid.appendChild(imgDiv);
+        });
+        
+        imageSelectorModal.classList.remove("hidden");
+    });
+
+    // Close image selector
+    closeImageSelector?.addEventListener("click", () => {
+        imageSelectorModal.classList.add("hidden");
+    });
+
+    // Remove selected image
+    removeImageBtn?.addEventListener("click", () => {
+        newPostImage.value = "";
+        selectedImageName.textContent = "No image selected";
+        imagePreview.style.display = "none";
+        previewImg.src = "";
+    });
+
+    // Click outside to close
+    imageSelectorModal?.addEventListener("click", (e) => {
+        if (e.target === imageSelectorModal) {
+            imageSelectorModal.classList.add("hidden");
+        }
+    });
+
+    // ===== EDIT IMAGE SELECTOR FUNCTIONALITY =====
+    const editImageInput = document.getElementById("edit-image");
+    const editImageSelectorBtn = document.createElement("button");
+    editImageSelectorBtn.type = "button";
+    editImageSelectorBtn.id = "edit-select-image-btn";
+    editImageSelectorBtn.className = "btn-secondary";
+    editImageSelectorBtn.textContent = "Choose Image";
+    editImageSelectorBtn.style.marginBottom = "10px";
+
+    // Insert the button before the edit image input
+    if (editImageInput && editImageInput.parentNode) {
+        editImageInput.parentNode.insertBefore(editImageSelectorBtn, editImageInput);
+    }
+
+    // Create a hidden input to store selected image path
+    const editSelectedImagePath = document.createElement("input");
+    editSelectedImagePath.type = "hidden";
+    editSelectedImagePath.id = "edit-selected-image";
+    if (editImageInput && editImageInput.parentNode) {
+        editImageInput.parentNode.insertBefore(editSelectedImagePath, editImageInput.nextSibling);
+    }
+
+    // Preview for edit modal
+    const editPreviewDiv = document.createElement("div");
+    editPreviewDiv.id = "edit-image-preview";
+    editPreviewDiv.style.display = "none";
+    editPreviewDiv.style.marginTop = "10px";
+    editPreviewDiv.innerHTML = `
+        <img src="" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 8px;">
+        <button type="button" id="edit-remove-image-btn" class="btn-small" style="margin-top: 5px; background: #ff4444; color: white; border: none; border-radius: 4px; padding: 4px 12px; cursor: pointer;">Remove</button>
+    `;
+
+    if (editImageInput && editImageInput.parentNode) {
+        editImageInput.parentNode.insertBefore(editPreviewDiv, editImageInput.nextSibling);
+    }
+
+    // Edit image selector click
+    document.getElementById("edit-select-image-btn")?.addEventListener("click", () => {
+        // Populate image grid
+        const editImageGrid = document.querySelector(".image-grid");
+        if (!editImageGrid) return;
+        
+        editImageGrid.innerHTML = "";
+        availableImages.forEach(img => {
+            const imgDiv = document.createElement("div");
+            imgDiv.className = "image-option";
+            imgDiv.style.cssText = "cursor: pointer; border: 2px solid transparent; border-radius: 8px; overflow: hidden; transition: all 0.2s;";
+            imgDiv.innerHTML = `
+                <img src="${img.path}" alt="${img.name}" style="width: 100%; height: 120px; object-fit: cover;">
+                <p style="text-align: center; margin: 5px 0; font-size: 0.9rem;">${img.name}</p>
+            `;
+            
+            imgDiv.addEventListener("click", () => {
+                // Select this image
+                editImageInput.value = img.path;
+                editSelectedImagePath.value = img.path;
+                
+                // Show preview
+                const previewImg = editPreviewDiv.querySelector("img");
+                previewImg.src = img.path;
+                editPreviewDiv.style.display = "block";
+                
+                // Close selector
+                imageSelectorModal.classList.add("hidden");
+            });
+            
+            editImageGrid.appendChild(imgDiv);
+        });
+        
+        imageSelectorModal.classList.remove("hidden");
+    });
+
+    // Edit remove image button
+    document.getElementById("edit-remove-image-btn")?.addEventListener("click", () => {
+        editImageInput.value = "";
+        editSelectedImagePath.value = "";
+        editPreviewDiv.style.display = "none";
+    });
+
+    // When opening edit modal, sync the image input
+    const originalShowEditPostModal = window.showEditPostModal;
+    window.showEditPostModal = function(postId) {
+        // Call original function first
+        originalShowEditPostModal(postId);
+        
+        // Then set up the image preview
+        setTimeout(() => {
+            const imageUrl = editImageInput.value;
+            if (imageUrl) {
+                const previewImg = editPreviewDiv.querySelector("img");
+                previewImg.src = imageUrl;
+                editPreviewDiv.style.display = "block";
+            }
+        }, 100);
+    };
+
+    // ===== EDIT POST MODAL FUNCTION =====
+    window.showEditPostModal = function(postId) {
+        console.log('Opening edit modal for post:', postId);
+        
+        const modal = document.getElementById('edit-post-modal');
+        const form = document.getElementById('edit-post-form');
+        const postCard = document.getElementById('post-' + postId);
+        
+        if (!postCard) {
+            console.error('Post card not found:', postId);
+            return;
+        }
+        
+        // Get post data from the DOM
+        const titleEl = postCard.querySelector('h3');
+        const contentEl = postCard.querySelector('.post-content');
+        const imageEl = postCard.querySelector('.post-image');
+        
+        const title = titleEl ? titleEl.textContent : '';
+        let content = '';
+        if (contentEl) {
+            // Get the raw text without HTML
+            content = contentEl.textContent || contentEl.innerText || '';
+            // Trim extra whitespace
+            content = content.trim();
+        }       
+        const image = imageEl ? imageEl.src : '';
+        
+        console.log('Post data:', { title, content, image });
+        
+        // Set form action
+        form.action = '/posts/edit/' + postId;
+        
+        // Fill in the form
+        document.getElementById('edit-title').value = title;
+        document.getElementById('edit-content').value = content;
+        document.getElementById('edit-image').value = image || '';
+        
+        // Show modal
+        modal.classList.remove('hidden');
+    };
+
+    // Cancel edit button
+    const cancelEdit = document.getElementById('cancel-edit');
+    if (cancelEdit) {
+        cancelEdit.addEventListener('click', function() {
+            document.getElementById('edit-post-modal').classList.add('hidden');
+        });
+    }
+
+    // Close modal if clicking outside
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('edit-post-modal');
+        if (event.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+
     // Post visibility
     document.querySelectorAll(".org-post").forEach(post => {
         const actions = post.querySelector(".post-actions");
@@ -111,6 +394,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             actions.classList.remove("hidden");
         }
     });
+
+    // ===== CREATE POST BUTTON VISIBILITY =====
+    if (canManagePosts) {
+        if (createBtn) {
+            createBtn.classList.remove("hidden");
+            console.log('Create button should now be visible');
+        } else {
+            console.log('Create button not found in DOM');
+        }
+    }
 
     function applyPostLogic(post) {
         const editBtn = post.querySelector(".edit-post-btn");
@@ -156,16 +449,72 @@ document.addEventListener("DOMContentLoaded", async () => {
             actions?.classList.add("hidden");
         }
 
-        editBtn?.addEventListener("click", () => {
-            const editing = content.isContentEditable;
-            content.contentEditable = !editing;
-            editBtn.textContent = editing ? "Edit" : "Save";
-            content.classList.toggle("editing");
+        // Edit post functionality
+        editBtn?.addEventListener("click", function() {
+            if (this.textContent === "Edit") {
+                // Switch to edit mode
+                content.contentEditable = true;
+                content.focus();
+                this.textContent = "Save";
+                content.classList.add("editing");
+            } else {
+                // Save changes to database
+                const newContent = content.textContent;
+                const postId = post.id.replace('post-', '');
+                
+                fetch('/posts/edit/' + postId, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: post.querySelector('h3').textContent,
+                        content: newContent,
+                        orgName: 'Archers for UNICEF'
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        content.contentEditable = false;
+                        this.textContent = "Edit";
+                        content.classList.remove("editing");
+                    } else {
+                        alert('Failed to save changes');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error saving post');
+                });
+            }
         });
 
-        deleteBtn?.addEventListener("click", () => {
+        // Delete post functionality
+        deleteBtn?.addEventListener("click", function(e) {
+            e.preventDefault();
             if (confirm("Delete this post?")) {
-                post.remove();
+                const postId = post.id.replace('post-', '');
+                
+                fetch('/posts/delete/' + postId, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        orgName: 'Archers for UNICEF'
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        post.remove(); // Remove from DOM after successful DB delete
+                    } else {
+                        alert('Failed to delete post');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error deleting post');
+                });
             }
         });
 
@@ -182,19 +531,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.querySelectorAll(".org-post").forEach(applyPostLogic);
 
-    const createBtn = document.getElementById("create-post-btn");
-    const modal = document.getElementById("create-post-modal");
-    const submitPost = document.getElementById("submit-post");
-    const cancelPost = document.getElementById("cancel-post");
-
-    const titleInput = document.getElementById("new-post-title");
-    const contentInput = document.getElementById("new-post-content");
-    const imageInput = document.getElementById("new-post-image");
-
-    const postsContainer = document.querySelector(".org-posts");
-
     if (canManagePosts) {
-        createBtn?.classList.remove("hidden");
+        if (createBtn) {
+            createBtn.classList.remove("hidden");
+            console.log('Create button should now be visible');
+        } else {
+            console.log('Create button not found in DOM');
+        }
     }
 
     createBtn?.addEventListener("click", () => {
@@ -211,97 +554,106 @@ document.addEventListener("DOMContentLoaded", async () => {
     submitPost?.addEventListener("click", () => {
         const title = titleInput?.value.trim();
         const content = contentInput?.value.trim();
+        const imageUrl = imageInput?.value.trim(); // Get the URL instead of file
 
         if (!title || !content) {
             alert("Title and content are required.");
             return;
         }
 
-        if (imageInput?.files && imageInput.files[0]) {
-            const reader = new FileReader();
+        // Disable button to prevent double submission
+        submitPost.disabled = true;
+        submitPost.textContent = 'Creating...';
 
-            reader.onload = function (e) {
-                createPost(e.target.result, title, content);
-            };
-
-            reader.readAsDataURL(imageInput.files[0]);
-        } else {
-            createPost("", title, content);
-        }
+        // Send as JSON
+        fetch('/posts/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: title,
+                content: content,
+                image: imageUrl || "", // Use the URL directly, empty string if none
+                orgName: 'Archers for UNICEF'
+            })
+        })
+        .then(response => {
+            // Check if response is JSON
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return response.json().then(data => {
+                    if (data.success) {
+                        // Clear the form
+                        titleInput.value = "";
+                        contentInput.value = "";
+                        imageInput.value = "";
+                        modal?.classList.add("hidden");
+                        // Reload to show the new post
+                        window.location.reload();
+                    } else {
+                        alert('Error creating post: ' + (data.error || 'Unknown error'));
+                    }
+                });
+            } else {
+                // If not JSON, it was a redirect - success!
+                window.location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to create post. Please try again.');
+        })
+        .finally(() => {
+            // Re-enable the submit button
+            submitPost.disabled = false;
+            submitPost.textContent = 'Post';
+        });
     });
 
     function createPost(imageSrc, title, content) {
         if (!postsContainer) return;
 
-        const post = document.createElement("article");
-        post.className = "org-post";
-
-        post.innerHTML = `
-            ${imageSrc ? `<img src="${imageSrc}" class="post-image lightbox-trigger">` : ""}
-            <div class="post-header">
-                <h3>${title}</h3>
-                <div class="post-actions ${canManagePosts ? "" : "hidden"}">
-                    <button class="edit-post-btn">Edit</button>
-                    <button class="delete-post-btn">Delete</button>
-                </div>
-            </div>
-            <span class="post-date">Just now</span>
-            <div class="post-content">${content}</div>
-            <button class="comment-toggle">View comments</button>
-            <div class="comments hidden"></div>
-            <div class="add-comment hidden">
-                <textarea class="comment-input" placeholder="Write a comment..."></textarea>
-                <button class="submit-comment">Post</button>
-            </div>
-            <p class="login-warning hidden">Log in to add a comment.</p>
-        `;
-
-        postsContainer.prepend(post);
-        applyPostLogic(post);
-
-        const addCommentBox = post.querySelector(".add-comment");
-        const warning = post.querySelector(".login-warning");
-        const submitBtn = post.querySelector(".submit-comment");
-        const textarea = post.querySelector(".comment-input");
-        const commentsContainer = post.querySelector(".comments");
-
-        if (isLoggedIn) {
-            addCommentBox?.classList.remove("hidden");
-            warning?.classList.add("hidden");
-        } else {
-            addCommentBox?.classList.add("hidden");
-            warning?.classList.remove("hidden");
-        }
-
-        submitBtn?.addEventListener("click", () => {
-            const text = textarea.value.trim();
-            if (!text) return;
-
-            const comment = document.createElement("div");
-            comment.className = "comment";
-            comment.dataset.owner = currentUser;
-
-            comment.innerHTML = `
-                <strong>${displayName}</strong>
-                <p class="comment-text">${text}</p>
-                <div class="comment-actions hidden">
-                    <button class="edit-comment-btn">Edit</button>
-                    <button class="delete-comment-btn">Delete</button>
-                </div>
-            `;
-
-            commentsContainer.appendChild(comment);
-            textarea.value = "";
-
-            applyCommentPermissions(comment);
+        // Send to server first
+        fetch('/posts/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: title,
+                content: content,
+                image: imageSrc,
+                orgName: 'Archers for UNICEF'
+            })
+        })
+        .then(response => {
+            // Check if response is JSON
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return response.json().then(data => {
+                    if (data.success) {
+                        window.location.reload();
+                    } else {
+                        alert('Error creating post: ' + (data.error || 'Unknown error'));
+                    }
+                });
+            } else {
+                // If not JSON, it's probably a redirect - success!
+                window.location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to create post. Please try again.');
+        })
+        .finally(() => {
+            // Re-enable the submit button
+            if (submitPost) {
+                submitPost.disabled = false;
+                submitPost.textContent = 'Post';
+            }
         });
-
-        post.querySelectorAll(".lightbox-trigger").forEach(attachLightbox);
-
-        modal?.classList.add("hidden");
-        if (titleInput) titleInput.value = "";
-        if (contentInput) contentInput.value = "";
-        if (imageInput) imageInput.value = "";
     }
 });
 

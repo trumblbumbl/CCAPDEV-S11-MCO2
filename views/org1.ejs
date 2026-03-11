@@ -14,7 +14,7 @@
 
     <body data-org="au@dlsu.edu.ph">
         <main>
-             <nav id="menu">
+            <nav id="menu">
                 <span class="menu-title">DLSU Organizations</span>
                 <input type="checkbox" id="responsive-menu"><label></label>
                 <ul>
@@ -142,332 +142,196 @@
                 
                 <button id="create-post-btn" class="create-post hidden"> Create Post </button>
 
-                <div class="org-section">
-                    <h2>Announcements & Updates</h2>
+                <div class="org-posts">
+                    <% if (posts && posts.length > 0) { %>
+                        <% posts.forEach(function(post) { %>
+                            <article class="org-post" id="post-<%= post._id %>">
+                                <% if (post.image) { %>
+                                <img src="<%= post.image %>"
+                                    alt="<%= post.title %>"
+                                    class="post-image lightbox-trigger">
+                                <% } %>
 
-                    <div class="org-posts">      
-                        <article class="org-post">
-                            <img src="/assets/AU_2ndGA.jpg"
-                            alt="2nd General Assembly"
-                            class="post-image lightbox-trigger">
-
-                            <div class="post-header">
-                                <h3>2nd General Assembly</h3>
-                                <div class="post-actions hidden">
-                                    <button class="edit-post-btn">Edit</button>
-                                    <button class="delete-post-btn">Delete</button>
-                                </div>
-                            </div>
-                            <span class="post-date">January 19, 2026</span>
-                            
-                            <div class="post-content">
-                                Let us fly beyond the ordinary! 💫 <br><br>
-                                The crew is calling, and Archers for UNICEF is ready to welcome its AUdventurers! ⚓️<br> 
-                                Take flight beyond the familiar and step into a journey where every voice matters, every dreamer counts, and every adventure inspires. Fly into the unknown, and let purpose guide your way! 🌟 
-                                <br><br>
-                                Join us for the 2nd General Assembly: Finding HAUme in Neverland on January 21, 2026, from 4:00 PM to 6:00 PM at Br. Andrew Gonzales Hall 1103. Explore new lands, find your new crew, and discover how your heart and ideas can shape something magical. 🧚‍♀️ 
-                                <br><br>
-                                ✨Don't miss the adventure by pre-registering here: bit.ly/AU_2ndGA_Pre-Reg 
-                                Your wings are ready… It's time to find your way home! 🗺️ <br><br>
-                                #TimeToFly <br>
-                                #FindingHAUmeinNeverland <br>
-                                #ArchersForUNICEF<br><br> 
-                                Pub by Brent Lim <br>
-                                Caption by Giliana Intalan <br>
-                                **Walk-ins are allowed for limited slots only. <br>
-                                As per CSO-PNP Approved: OPA-03116
-                            </div>
-
-                            <button class="comment-toggle">View comments</button>
-                            <div class="comments hidden">
-                            <% const post3Comments = comments.filter(c => c.post === "post3" && c.page == "org1"); %>
-                                <% if (post3Comments.length > 0) { %>
-                                    <% post3Comments.forEach(comment => { %>
-                                    <div class="comment" data-owner="<%= comment.user?._id %>">
-
-                                        <div class="comment-header">
-                                        <strong>
-                                          <% if (comment.user) { %>
-                                            <% if (comment.user.userType === "admin") { %>
-                                              Admin
-                                            <% } else if (comment.user.userType === "organization") { %>
-                                              <%= comment.user.orgName %>
-                                            <% } else { %>
-                                              <%= comment.user.firstName %> <%= comment.user.lastName %>
-                                            <% } %>
-                                          <% } else { %>
-                                            User
-                                          <% } %>
-                                          </strong>
-
-                                        <% if (user && (user.userType === "admin" || (comment.user && comment.user._id == user.id))) { %>
-
-
-                                        <div class="comment-actions">
-
-                                          <button class="edit-comment-btn">Edit</button>
-
-                                          <form action="/delete-comment/<%= comment._id %>" method="POST">
-                                            <button type="submit" class="delete-comment-btn">Delete</button>
-                                          </form>
-
-                                        </div>
-
+                                <div class="post-header">
+                                    <h3><%= post.title %></h3>
+                                    <div class="post-actions" style="display: flex; gap: 10px; align-items: center;">
+                                        <!-- LIKE BUTTON - FOR ALL LOGGED IN USERS -->
+                                        <% if (user) { %>
+                                            <% 
+                                                let userLiked = false;
+                                                if (post.likes) {
+                                                    userLiked = post.likes.some(function(like) {
+                                                        return like.toString() === user.id.toString();
+                                                    });
+                                                }
+                                            %>
+                                            <button class="like-btn" 
+                                                    data-post-id="<%= post._id %>"
+                                                    data-liked-by-user="<%= userLiked %>"
+                                                    style="display: inline-flex; align-items: center; gap: 5px; background: none; border: 1px solid #046307; padding: 5px 10px; border-radius: 20px; color: #046307; cursor: pointer;">
+                                                ❤️ <span class="like-count"><%= post.likes ? post.likes.length : 0 %></span>
+                                            </button>
                                         <% } %>
-                                      </div>
-
-                                      <p class="comment-text"><%= comment.text %></p>
-
-                                      <form action="/edit-comment/<%= comment._id %>" method="POST" class="edit-comment-form hidden">
-                                        <input type="text" name="text" value="<%= comment.text %>" required>
-                                        <button type="submit">Save</button>
-                                      </form>
-
-                                    </div>
-
-
-                                <% }) %>
-                            <% } else { %>
-                            <p>No comments yet.</p>
-                            <% } %>
-
-                            <% if (user) { %>
-                            <form action="/add-comment" method="POST" class="add-comment">
-                            <textarea name="text" class="comment-input" placeholder="Write a comment..."></textarea>
-                            <input type="hidden" name="page" value="org1">
-                            <input type="hidden" name="postId" value="post3">
-                            <button type="submit" class="submit-comment">Post</button>
-                            </form>
-                            <% } else { %>
-                            <p class="login-warning">Log in to add a comment.</p>
-                            <% } %>
-
-                            </div>
-
-                        </article>
-
-                        <article class="org-post">
-                            <img src="/assets/AU_WCD.jpg"
-                            alt="World Children's Day"
-                            class="post-image lightbox-trigger">
-
-                            <div class="post-header">
-                                <h3>World Children's Day</h3>
-                                <div class="post-actions hidden">
-                                    <button class="edit-post-btn">Edit</button>
-                                    <button class="delete-post-btn">Delete</button>
-                                </div>
-                            </div>
-                            <span class="post-date">November 20, 2025</span>
-                            <div class="post-content">
-                                "A person's a person, no matter how small" - Dr. Seuss🤗<br><br>
-                                This World Children's Day, we celebrate the wonder, curiosity, and joy that children bring to our communities. 👧 Their voices, their questions, their laughter — each reminds us of the importance of nurturing safe spaces where their dreams can grow. 🌱
-                                <br><br>
-                                Now, let us be reminded that every small voice matters, because it's their day, their rights, and their opportunity to shape the world around them. 🗣️🌎
-                                <br><br>
-                                To know more about World Children's Day, you may visit the links below:
-                                🔗https://www.unicef.org/parenting/world-childrens-day-toolkit
-                                🔗https://www.un.org/en/observances/world-childrens-day
-                                🔗https://www.who.int/.../20-11-2019-world-children-s-day...
-                                🔗https://www.unicef.org/.../focus-children-climate-change...
-                                <br><br>
-                                #MyDayMyRights #WorldChildrensDay #MonthlyMAUtters <br>
-                                #ArchersForUNICEF<br>
-                                Pub by Clara Nicdao<br>
-                                Caption by Wyonna Quiambao<br>
-                                As per CSO-PNP Approved: OPA-02738
-                            </div>
-
-                            <button class="comment-toggle">View comments</button>
-                            <div class="comments hidden">
-                            <% const post2Comments = comments.filter(c => c.post === "post2" && c.page == "org1"); %>
-                                <% if (post2Comments.length > 0) { %>
-                                    <% post2Comments.forEach(comment => { %>
-                                    <div class="comment" data-owner="<%= comment.user?._id %>">
-
-                                        <div class="comment-header">
-                                        <strong>
-                                          <% if (comment.user) { %>
-                                            <% if (comment.user.userType === "admin") { %>
-                                              Admin
-                                            <% } else if (comment.user.userType === "organization") { %>
-                                              <%= comment.user.orgName %>
-                                            <% } else { %>
-                                              <%= comment.user.firstName %> <%= comment.user.lastName %>
-                                            <% } %>
-                                          <% } else { %>
-                                            User
-                                          <% } %>
-                                          </strong>
-
-                                        <% if (user && (user.userType === "admin" || (comment.user && comment.user._id == user.id))) { %>
-
-
-                                        <div class="comment-actions">
-
-                                          <button class="edit-comment-btn">Edit</button>
-
-                                          <form action="/delete-comment/<%= comment._id %>" method="POST">
-                                            <button type="submit" class="delete-comment-btn">Delete</button>
-                                          </form>
-
-                                        </div>
-
+                                        
+                                        <!-- EDIT/DELETE BUTTONS - ONLY FOR ORG OWNER -->
+                                        <% if (user && user.userType === 'organization' && user.email === 'au@dlsu.edu.ph') { %>
+                                            <button class="edit-post-btn" onclick="showEditPostModal('<%= post._id %>')" style="background: none; border: 1px solid #046307; color: #046307; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Edit</button>
+                                            <form action="/posts/delete/<%= post._id %>" method="POST" style="display: inline;">
+                                                <input type="hidden" name="orgName" value="Archers for UNICEF">
+                                                <button type="submit" class="delete-post-btn" onclick="return confirm('Are you sure?')" style="background: none; border: 1px solid #046307; color: #046307; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Delete</button>
+                                            </form>
                                         <% } %>
-                                      </div>
-
-                                      <p class="comment-text"><%= comment.text %></p>
-
-                                      <form action="/edit-comment/<%= comment._id %>" method="POST" class="edit-comment-form hidden">
-                                        <input type="text" name="text" value="<%= comment.text %>" required>
-                                        <button type="submit">Save</button>
-                                      </form>
-
                                     </div>
-
-
-                                <% }) %>
-                            <% } else { %>
-                            <p>No comments yet.</p>
-                            <% } %>
-
-                            <% if (user) { %>
-                            <form action="/add-comment" method="POST" class="add-comment">
-                            <textarea name="text" class="comment-input" placeholder="Write a comment..."></textarea>
-                            <input type="hidden" name="page" value="org1">
-                            <input type="hidden" name="postId" value="post2">
-                            <button type="submit" class="submit-comment">Post</button>
-                            </form>
-                            <% } else { %>
-                            <p class="login-warning">Log in to add a comment.</p>
-                            <% } %>
-
-                            </div>
-
-
-                        </article>
-
-                        <article class="org-post">
-                            <img src="/assets/AU_MAUgic.jpg"
-                            alt="MAUgic in Motion"
-                            class="post-image lightbox-trigger">
-
-                            <div class="post-header">
-                                <h3>MAUgic in Motion: Unleashing the Powers Within</h3>
-                                <div class="post-actions hidden">
-                                    <button class="edit-post-btn">Edit</button>
-                                    <button class="delete-post-btn">Delete</button>
                                 </div>
-                            </div>
-                            <span class="post-date">November 13, 2025</span>
+                                
+                                <span class="post-date"><%= new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+                                
+                                <div class="post-content">
+                                    <%- post.content.replace(/\n/g, '<br>') %>
+                                </div>
 
-                            <div class="post-content">
-                                Good news, guiding spirits! 🧙🏻‍♀️ <br><br>
-                                🌲 In the forest, an unknown power calls and reaches out to you. It's your time to guide the hands of adventurers destined to awaken their inner magic and set it in motion. 
-                                <br><br>
-                                Take part in MAUgic in Motion: Unleashing the Powers Within, where you'll lead our young adventurers through a world of imagination, teamwork, and wonder. 💜 Help others discover the power they never knew they had. 🧚🏻‍♀️
-                                <br><br>
-                                🕯 Be the guiding light for our young dreamers on November 22, 2025, from 10:00 AM  to 12:00 PM at John Gokongwei Building, G104-105, as they journey through tales that sparkle and adventures that awaken the mAUgic within.  💫
-                                <br><br>
-                                🪄Step forward and claim your role as a facilitator by following these steps: <br>
-                                1️⃣ Prove your magical potential by filling out the Eligibility Form: bit.ly/MaMoEligibilityForms<br>
-                                2️⃣ Once your eligibility is confirmed, sign up here: bit.ly/MaMo-PreRegForm<br>
-                                The forest has chosen you, it's time to let your light lead the way! 🌙
-                                <br><br>
-                                #TheMAUgicBegins #MAUgicinMotion <br>
-                                #ArchersForUnicef<br>
-                                Pub by Khyra Villorente<br>
-                                Caption by Giliana Intalan<br>
-                                As per CSO-PNP Approved: OPA-02320
-                            </div>
+                                <button class="comment-toggle">View comments</button>
+                                <div class="comments hidden">
+                                    <% 
+                                        // Filter comments for this post
+                                        var postComments = [];
+                                        if (comments && comments.length > 0) {
+                                            postComments = comments.filter(function(c) { 
+                                                return c.post && c.post.toString() === post._id.toString(); 
+                                            });
+                                        }
+                                    %>
+                                    
+                                    <% if (postComments.length > 0) { %>
+                                        <% postComments.forEach(function(comment) { %>
+                                            <div class="comment" data-owner="<%= comment.user ? comment.user._id : '' %>">
+                                                <div class="comment-header">
+                                                    <strong>
+                                                        <% if (comment.user) { %>
+                                                            <% if (comment.user.userType === "admin") { %>
+                                                                Admin
+                                                            <% } else if (comment.user.userType === "organization") { %>
+                                                                <%= comment.user.orgName %>
+                                                            <% } else { %>
+                                                                <%= comment.user.firstName %> <%= comment.user.lastName %>
+                                                            <% } %>
+                                                        <% } else { %>
+                                                            User
+                                                        <% } %>
+                                                    </strong>
+                                                    
+                                                    <% if (user && (user.userType === "admin" || (comment.user && comment.user._id.toString() === user.id.toString()))) { %>
+                                                        <div class="comment-actions">
+                                                            <button class="edit-comment-btn">Edit</button>
+                                                            <form action="/delete-comment/<%= comment._id %>" method="POST" style="display: inline;">
+                                                                <button type="submit" class="delete-comment-btn">Delete</button>
+                                                            </form>
+                                                        </div>
+                                                    <% } %>
+                                                </div>
+                                                
+                                                <p class="comment-text"><%= comment.text %></p>
+                                                
+                                                <form action="/edit-comment/<%= comment._id %>" method="POST" class="edit-comment-form hidden">
+                                                    <input type="text" name="text" value="<%= comment.text %>" required>
+                                                    <button type="submit">Save</button>
+                                                </form>
+                                            </div>
+                                        <% }); %>
+                                    <% } else { %>
+                                        <p>No comments yet.</p>
+                                    <% } %>
 
-                           <button class="comment-toggle">View comments</button>
-                            <div class="comments hidden">
-                            <% const post1Comments = comments.filter(c => c.post === "post1" && c.page == "org1"); %>
-                                <% if (post1Comments.length > 0) { %>
-                                    <% post1Comments.forEach(comment => { %>
-                                    <div class="comment" data-owner="<%= comment.user?._id %>">
-
-                                        <div class="comment-header">
-                                        <strong>
-                                          <% if (comment.user) { %>
-                                            <% if (comment.user.userType === "admin") { %>
-                                              Admin
-                                            <% } else if (comment.user.userType === "organization") { %>
-                                              <%= comment.user.orgName %>
-                                            <% } else { %>
-                                              <%= comment.user.firstName %> <%= comment.user.lastName %>
-                                            <% } %>
-                                          <% } else { %>
-                                            User
-                                          <% } %>
-                                          </strong>
-
-                                        <% if (user && (user.userType === "admin" || (comment.user && comment.user._id == user.id))) { %>
-
-                                        <div class="comment-actions">
-
-                                          <button class="edit-comment-btn">Edit</button>
-
-                                          <form action="/delete-comment/<%= comment._id %>" method="POST">
-                                            <button type="submit" class="delete-comment-btn">Delete</button>
-                                          </form>
-
-                                        </div>
-
-                                        <% } %>
-                                      </div>
-
-                                      <p class="comment-text"><%= comment.text %></p>
-
-                                      <form action="/edit-comment/<%= comment._id %>" method="POST" class="edit-comment-form hidden">
-                                        <input type="text" name="text" value="<%= comment.text %>" required>
-                                        <button type="submit">Save</button>
-                                      </form>
-
-                                    </div>
-
-
-                                <% }) %>
-                            <% } else { %>
-                            <p>No comments yet.</p>
-                            <% } %>
-
-                            <% if (user) { %>
-                            <form action="/add-comment" method="POST" class="add-comment">
-                            <textarea name="text" class="comment-input" placeholder="Write a comment..."></textarea>
-                            <input type="hidden" name="page" value="org1">
-                            <input type="hidden" name="postId" value="post1">
-                            <button type="submit" class="submit-comment">Post</button>
-                            </form>
-                            <% } else { %>
-                            <p class="login-warning">Log in to add a comment.</p>
-                            <% } %>
-
-                            </div>
-
-
-                        </article>
-
-                    </div>
+                                    <% if (user) { %>
+                                        <form action="/add-comment" method="POST" class="add-comment">
+                                            <textarea name="text" class="comment-input" placeholder="Write a comment..."></textarea>
+                                            <input type="hidden" name="page" value="org1">
+                                            <input type="hidden" name="postId" value="<%= post._id %>">
+                                            <button type="submit" class="submit-comment">Post</button>
+                                        </form>
+                                    <% } else { %>
+                                        <p class="login-warning"><a href="/login">Log in</a> to add a comment.</p>
+                                    <% } %>
+                                </div>
+                            </article>
+                        <% }); %>
+                    <% } else { %>
+                        <p class="no-posts">No posts yet.</p>
+                    <% } %>
                 </div>
             </section>
         </main>
 
         <div id="create-post-modal" class="modal hidden">
-        <div class="modal-content">
-            <h3>Create New Post</h3>
-
-            <input type="text" id="new-post-title" placeholder="Post title">
-
-            <textarea id="new-post-content" placeholder="Write your announcement..."></textarea>
-
-            <input type="file" id="new-post-image" accept="image/*">
-
-            <div class="modal-actions">
-                <button id="submit-post">Post</button>
-                <button id="cancel-post">Cancel</button>
+            <div class="modal-content">
+                <h3>Create New Post</h3>
+                
+                <input type="text" id="new-post-title" placeholder="Post title">
+                
+                <textarea id="new-post-content" placeholder="Write your announcement..."></textarea>
+                
+                <!-- Image selection area -->
+                <div class="image-selection-area">
+                    <button type="button" id="select-image-btn" class="btn-secondary">Choose Image</button>
+                    <span id="selected-image-name">No image selected</span>
+                    <input type="hidden" id="new-post-image" value="">
+                </div>
+                
+                <!-- Image preview -->
+                <div id="image-preview" style="display: none; margin-top: 10px;">
+                    <img src="" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 8px;">
+                    <button type="button" id="remove-image-btn" class="btn-small" style="margin-top: 5px;">Remove</button>
+                </div>
+                
+                <div class="modal-actions">
+                    <button id="submit-post">Post</button>
+                    <button id="cancel-post">Cancel</button>
+                </div>
             </div>
+        </div>
+
+        <!-- Edit Post Modal -->
+        <div id="edit-post-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3>Edit Post</h3>
+                <form action="" method="POST" id="edit-post-form">
+                    <input type="hidden" name="orgName" value="Archers for UNICEF">
+                    
+                    <div class="form-group">
+                        <label for="edit-title">Title:</label>
+                        <input type="text" name="title" id="edit-title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-content">Content:</label>
+                        <textarea name="content" id="edit-content" rows="6" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-image">Image URL:</label>
+                        <input type="text" name="image" id="edit-image" placeholder="/assets/post-image.jpg">
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button type="submit" class="btn-primary">Save Changes</button>
+                        <button type="button" id="cancel-edit" class="btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Image Selector Modal -->
+        <div id="image-selector-modal" class="modal hidden">
+            <div class="modal-content" style="max-width: 800px;">
+                <h3>Select an Image</h3>
+                
+                <div class="image-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; max-height: 400px; overflow-y: auto;">
+                    <!-- Images will be loaded here dynamically -->
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" id="close-image-selector" class="btn-secondary">Cancel</button>
+                </div>
             </div>
         </div>
 
@@ -481,6 +345,3 @@
         
     </body>
 </html>
-
-
-

@@ -24,12 +24,16 @@ CCAPDEV-S11-MCO2/
 │   ├── adminController.js           
 │   ├── authController.js            
 │   ├── commentController.js        
-│   ├── orgController.js             
+│   ├── orgController.js
+│   ├── postController.js  
+│   ├── reviewController.js           
 │   └── profileController.js         
 ├── middleware/                      ←---- functions for req-res cycle
 │   └── authMiddleware.js            
 ├── models/                           ←---- database schemas
 │   ├── Comment.js
+│   ├── Post.js
+│   ├── Review.js
 │   └── User.js
 ├── node_modules/                     ←---- contains all installed dependencies
 ├── public/                           ←---- html, css, assets
@@ -38,6 +42,8 @@ CCAPDEV-S11-MCO2/
 │   ├── authRoutes.js
 │   ├── commentRoutes.js
 │   ├── orgRoutes.js
+│   ├── postRoutes.js
+│   ├── reviewRoutes.js
 │   └── profileRoutes.js
 ├── views/                            ←---- front-end rendered by server and sent as html
 ├── package-lock.json                 ←---- locks exact versions of dependencies

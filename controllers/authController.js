@@ -32,6 +32,7 @@ async function postLogin(req, res) {
         req.session.user = {
             id: user._id,
             userType: user.userType,
+            email: user.email,
             firstName: user.firstName || "",
             lastName: user.lastName || "",
             orgName: user.orgName || ""

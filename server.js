@@ -44,6 +44,7 @@ app.use("/", require("./routes/orgRoutes"));
 app.use("/", require("./routes/commentRoutes"));
 app.use("/", require("./routes/adminRoutes"));
 app.use("/", require("./routes/reviewRoutes"));
+app.use("/", require("./routes/postRoutes"));
 
 // Static pages
 app.get("/contact",  (req, res) => res.render("contact"));

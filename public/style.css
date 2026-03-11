@@ -2216,3 +2216,75 @@ main .btn-secondary {
         padding: 8px 10px;
     }
 }
+
+/* FORCE LIKE BUTTONS TO BE VISIBLE */
+.like-btn {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: none !important;
+    border: 1px solid #046307 !important;
+    color: #046307 !important;
+    padding: 5px 10px !important;
+    border-radius: 20px !important;
+    margin: 0 5px !important;
+}
+
+/* Ensure the post-actions container doesn't hide them */
+.post-actions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    align-items: center !important;
+}
+
+/* Remove any hidden class that might be applied */
+.post-actions.hidden,
+.like-btn.hidden {
+    display: flex !important;  /* Override hidden class */
+}
+
+/* Image Selector Styles */
+.image-option:hover {
+    border-color: #046307 !important;
+    transform: scale(1.02);
+}
+
+.image-option.selected {
+    border-color: #046307 !important;
+    background: rgba(4, 99, 7, 0.1);
+}
+
+#select-image-btn {
+    padding: 8px 16px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#select-image-btn:hover {
+    background: #e0e0e0;
+}
+
+#remove-image-btn {
+    padding: 4px 12px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#remove-image-btn:hover {
+    background: #cc0000;
+}
+
+.image-selection-area {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
